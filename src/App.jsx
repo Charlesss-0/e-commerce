@@ -1,12 +1,12 @@
 import Header from './components/header'
-import Discounts from './components/discounts'
+import Hero from './components/hero'
 import ClothingSection from './components/clothingSection'
 
 export default function App() {
 	return (
 		<>
 			<Header />
-			<Discounts />
+			<Hero />
 			<ClothingSection />
 		</>
 	)
