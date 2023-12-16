@@ -11,9 +11,7 @@ export default function Header() {
 	return (
 		<header className="p-[1rem] border-b-solid border shadow-md">
 			<div className="flex">
-				<h1 className="grow text-[1.5rem] font-bold tracking-[0.3rem]">
-					Forever
-				</h1>
+				<h1 className="grow text-[1.5rem] font-bold tracking-[0.3rem]">QC</h1>
 
 				<div className="bg-[#efefef] rounded-[50em] p-[0.5rem] px-[1rem] flex items-center gap-[1rem]">
 					<i className="fi fi-rr-search"></i>

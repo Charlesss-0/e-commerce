@@ -37,12 +37,12 @@ function ClothingItem({ items }) {
 								src={item.img}
 								alt={item.title}
 								className="
-                            w-full
-                            h-full
-                            hover:scale-105 
-                            transition-all 
-                            duration-300
-                        "
+									w-full
+									h-full
+									hover:scale-105 
+									transition-all 
+									duration-300
+								"
 							/>
 						</div>
 						<h1 className="mb-[0.5rem]">Lorem ipsum sir amet</h1>
