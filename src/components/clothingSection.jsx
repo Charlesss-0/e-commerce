@@ -29,7 +29,9 @@ function ClothingItem({ items }) {
                             m-[1rem] 
                             rounded-lg 
                             shadow-lg
-                            hover:cursor-pointer 
+                            hover:cursor-pointer
+							hover:child-flex
+							relative
 
                             "
 						>
@@ -44,14 +46,29 @@ function ClothingItem({ items }) {
 									duration-300
 								"
 							/>
+							<div
+								className="
+									gap-[1rem] 
+									absolute 
+									bottom-0 
+									left-[50%] 
+									translate-x-[-50%] 
+									mb-[0.5rem] 
+									hidden
+									[&>i]:shadow-md 
+									[&>i]:bg-[#efefef] 
+									[&>i]:p-[0.5rem] 
+									[&>i]:rounded-lg
+									"
+							>
+								<i className="fi fi-rr-heart hover:opacity-[0.9]"></i>
+								<i className="fi fi-rr-plus hover:opacity-[0.9]"></i>
+							</div>
 						</div>
 						<h1 className="mb-[0.5rem]">Lorem ipsum sir amet</h1>
 						<p className="text-[0.6rem]">USD {item.price}</p>
 					</div>
-					<div className="grid gap-[1rem] [&>i]:hover:cursor-pointer">
-						<i className="fi fi-rr-plus"></i>
-						<i className="fi fi-rr-heart"></i>
-					</div>
+					<div className="grid gap-[1rem] [&>i]:hover:cursor-pointer"></div>
 				</div>
 			))}
 		</div>

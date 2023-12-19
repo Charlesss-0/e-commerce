@@ -24,3 +24,7 @@ i {
 .text-shadow {
 	text-shadow: 3px 3px 3px #000a;
 }
+
+.hover\:child-flex:hover > div {
+	display: flex;
+}
