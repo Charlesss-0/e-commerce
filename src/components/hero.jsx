@@ -1,12 +1,39 @@
-import hero from '../assets/hero.jpeg'
+import { useEffect, useState, useRef } from 'react'
+
+const image = {
+	max: {
+		src: 'https://www.apple.com/v/airpods-max/f/images/overview/hero__gnfk5g59t0qe_xlarge.png',
+		alt: 'AirPods Max',
+	},
+	pro: {
+		src: 'https://www.apple.com/105/media/us/airpods-pro/2022/d2deeb8e-83eb-48ea-9721-f567cf0fffa8/anim/hero/large/0000.png',
+		alt: 'AirPods Pro',
+	},
+}
 
 export default function Hero() {
+	const [scrollY, setScrollY] = useState(false)
+
+	useEffect(() => {
+		const handleScroll = () => {
+			setScrollY(window.scrollY)
+		}
+
+		window.addEventListener('scroll', handleScroll)
+
+		return () => window.removeEventListener('scroll', handleScroll)
+	}, [])
+
 	return (
-		<div className="h-[30rem] overflow-hidden relative">
-			<img src={hero} alt="hero image" className="w-full" />
-			<h1 className="text-white text-[3rem] text-shadow font-bold absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]">
-				Discover our new selection
-			</h1>
+		<div className="flex flex-col items-center [&>img]:h-screen h-screen">
+			<img src={image.max.src} alt={image.max.alt} />
+			<img
+				src={image.pro.src}
+				alt={image.pro.alt}
+				className={`bg-[#000] transition-all duration-500 ${
+					scrollY ? 'translate-y-[-100%]' : null
+				}`}
+			/>
 		</div>
 	)
 }
