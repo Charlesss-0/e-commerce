@@ -1,39 +1,52 @@
-import { useEffect, useState, useRef } from 'react'
+import { useEffect, useState } from 'react'
+import styled from 'styled-components'
 
-const image = {
-	max: {
-		src: 'https://www.apple.com/v/airpods-max/f/images/overview/hero__gnfk5g59t0qe_xlarge.png',
-		alt: 'AirPods Max',
-	},
-	pro: {
-		src: 'https://www.apple.com/105/media/us/airpods-pro/2022/d2deeb8e-83eb-48ea-9721-f567cf0fffa8/anim/hero/large/0000.png',
-		alt: 'AirPods Pro',
-	},
+const Container = styled.div`
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+`
+
+const Image = styled.img`
+	transition: all 500ms;
+	border: solid 1px black;
+	width: 100%;
+`
+
+const img = {
+	src: 'https://static.zara.net/photos///contents/mkt/spots/aw23-north-woman-new/subhome-xmedia-51-3//w/1669/IMAGE-landscape-fill-9b14d69e-46d1-4d1e-85fa-037b9271bd79-default_0.jpg?ts=1703441149470',
+	alt: 'Zara hero image',
 }
 
 export default function Hero() {
-	const [scrollY, setScrollY] = useState(false)
+	const [scrollTo, setScrollTo] = useState(false)
 
 	useEffect(() => {
 		const handleScroll = () => {
-			setScrollY(window.scrollY)
+			if (!scrollTo) {
+				window.scrollTo({
+					top: window.innerHeight,
+					behavior: 'smooth',
+				})
+				setScrollTo(true)
+			}
 		}
 
 		window.addEventListener('scroll', handleScroll)
 
-		return () => window.removeEventListener('scroll', handleScroll)
-	}, [])
+		return () => {
+			window.removeEventListener('scroll', handleScroll)
+		}
+	}, [scrollTo])
 
 	return (
-		<div className="flex flex-col items-center [&>img]:h-screen h-screen">
-			<img src={image.max.src} alt={image.max.alt} />
-			<img
-				src={image.pro.src}
-				alt={image.pro.alt}
-				className={`bg-[#000] transition-all duration-500 ${
-					scrollY ? 'translate-y-[-100%]' : null
-				}`}
-			/>
-		</div>
+		<Container>
+			<div className="h-screen overflow-hidden w-full grid content-center">
+				<Image src={img.src} alt={img.alt} />
+			</div>
+			<div
+				className={`h-screen w-full bg-[aliceblue] transition-all duration-500`}
+			></div>
+		</Container>
 	)
 }

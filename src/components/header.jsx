@@ -17,11 +17,8 @@ export default function Header() {
 	}, [])
 
 	const menuItems = [
-		{ name: 'Women' },
-		{ name: 'Men' },
-		{ name: 'Kids' },
-		{ name: 'Sports' },
-		{ name: 'Brands' },
+		{ name: 'Products' },
+		{ name: 'Contact us' },
 		{ name: 'New' },
 	]
 
@@ -38,7 +35,7 @@ export default function Header() {
 					<i className="fi fi-rr-search"></i>
 					<input
 						type="search"
-						name="search-query"
+						name="search-input"
 						placeholder="Search..."
 						className="bg-[#efefef] outline-none"
 					/>
