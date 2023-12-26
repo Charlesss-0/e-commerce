@@ -7,19 +7,7 @@
 body {
 	font-family: 'Montserrat', sans-serif;
 	scroll-behavior: smooth;
-}
-
-header {
-	backdrop-filter: blur(10px);
-}
-
-input {
-	font-family: 'Nunito Sans', sans-serif;
-}
-
-input::placeholder {
-	color: #5f5f5f;
-	font-family: 'Nunito Sans', sans-serif;
+	background: aliceblue;
 }
 
 i {
