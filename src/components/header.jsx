@@ -21,19 +21,20 @@ const Header = styled.header`
 `
 
 const SearchField = styled.div`
-	width: 18em;
-	background: #fff;
+	width: 8.5em;
 	padding: 0.5rem 1rem;
 	display: flex;
 	align-items: center;
 	gap: 1rem;
-	border: 1px solid #000;
+	background: #fff;
+	border: 1px solid #aaa;
+	border-radius: 100em;
 	transition: all 500ms;
 
 	${props =>
 		props.$focus &&
 		`
-		width: 25em;
+		width: 30em;
 	`}
 `
 
@@ -56,7 +57,7 @@ const SearchInput = styled.input`
 
 const Item = styled.li`
 	padding: 0.3rem 1rem;
-	border-radius: 100em;
+	color: #5a5a5a;
 
 	&:hover {
 		cursor: pointer;
@@ -65,8 +66,7 @@ const Item = styled.li`
 	${props =>
 		props.$selected &&
 		`
-		background: #fff;
-		border: solid 1px #aaa;
+		color: #000;
 	`}
 `
 
@@ -98,10 +98,15 @@ export default function HeaderContent() {
 
 	return (
 		<Header $primary={isScrolled}>
-			<div className="flex">
-				<h1 className="grow text-[1.5rem] font-bold tracking-[0.3rem]">GC</h1>
+			<div className="flex items-center pl-[1rem]">
+				<h1 className="grow text-[2rem] font-bold tracking-[0.3rem]">GC</h1>
 
-				<SearchField onFocus={handleFocus} onBlur={handleFocus} $focus={focus}>
+				<SearchField
+					onFocus={handleFocus}
+					onBlur={handleFocus}
+					$focus={focus}
+					tabIndex={1}
+				>
 					<i className="fi fi-rr-search"></i>
 					<SearchInput
 						type="search"
