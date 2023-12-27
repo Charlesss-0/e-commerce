@@ -10,6 +10,13 @@ const Header = styled.header`
 	width: 100%;
 	padding: 1rem;
 	z-index: 1;
+	transition: all 500ms;
+
+	&:hover {
+		background: #fff3;
+		box-shadow: 1px 1px 5px #0005;
+		backdrop-filter: blur(10px);
+	}
 
 	${props =>
 		props.$primary &&
