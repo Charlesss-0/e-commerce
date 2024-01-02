@@ -64,16 +64,21 @@ const SearchInput = styled.input`
 
 const Item = styled.li`
 	padding: 0.3rem 1rem;
-	color: #5a5a5a;
+	color: #2f2f2f;
 
 	&:hover {
 		cursor: pointer;
+		color: #000;
 	}
 
 	${props =>
 		props.$selected &&
 		`
 		color: #000;
+
+		&:hover {
+			cursor: pointer;
+		}
 	`}
 `
 

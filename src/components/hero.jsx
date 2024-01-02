@@ -1,5 +1,4 @@
-import { useEffect, useState } from 'react'
-import styled, { keyframes } from 'styled-components'
+import styled from 'styled-components'
 
 const img = {
 	src: 'https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?q=80&w=1932&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
@@ -8,22 +7,27 @@ const img = {
 
 const Container = styled.div`
 	display: flex;
-	flex-direction: column;
-	align-items: center;
+	height: 100vh;
+	width: 100%;
+	transition: all 500ms;
+	position: relative;
+
+	&::before {
+		content: '';
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		background: rgb(89 126 82 / 0.4);
+	}
 `
 
 export default function Hero() {
 	return (
 		<Container>
-			<div className="overflow-hidden h-screen w-full flex justify-center items-center transition-all duration-500">
-				<img src={img.src} alt={img.alt} draggable={false} className="w-full" />
-				<div className="absolute w-full h-full bg-[#597E52]/30 flex justify-center items-center">
-					<h1 className="text-[3rem] text-white font-bold">
-						Make the most out of your place
-					</h1>
-				</div>
-			</div>
-			<div className="h-screen w-full transition-all duration-500"></div>
+			<img src={img.src} alt={img.alt} draggable={false} className="w-full" />
+			<h1 className="text-[3rem] text-white font-bold absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]">
+				Make the most out of your place
+			</h1>
 		</Container>
 	)
 }
