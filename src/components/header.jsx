@@ -98,11 +98,7 @@ export default function HeaderContent() {
 		}
 	}, [isScrolled])
 
-	const menuItems = [
-		{ name: 'Products' },
-		{ name: 'Contact us' },
-		{ name: 'New' },
-	]
+	const menuItems = [{ name: 'Home' }, { name: 'Shop' }, { name: 'About' }]
 
 	const handleFocus = () => {
 		setFocus(!focus)

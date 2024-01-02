@@ -21,13 +21,28 @@ const Container = styled.div`
 	}
 `
 
+export const PrimaryButton = styled.button`
+	margin-top: 2vh;
+	font-size: 1.8rem;
+	border: 2px solid #fff;
+	padding: 0.5rem 1.5rem;
+	transition: all 500ms;
+	font-weight: 600;
+
+	&:hover {
+		background: #fff;
+		color: #2f2f2f;
+	}
+`
+
 export default function Hero() {
 	return (
 		<Container>
 			<img src={img.src} alt={img.alt} draggable={false} className="w-full" />
-			<h1 className="text-[3rem] text-white font-bold absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]">
-				Make the most out of your place
-			</h1>
+			<div className="text-[3rem] text-white font-bold absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]">
+				<h1>Make the most out of your place</h1>
+				<PrimaryButton>Shop Now</PrimaryButton>
+			</div>
 		</Container>
 	)
 }
