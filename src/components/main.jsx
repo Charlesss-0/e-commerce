@@ -141,6 +141,17 @@ export default function Main() {
 					Load more
 				</button>
 			</Products>
+
+			<HighlightContainer>
+				<img src="https://images.unsplash.com/photo-1594026112284-02bb6f3352fe?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" />
+				<div className="absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] flex flex-col items-center">
+					<h1 className=" text-white text-[3rem] font-bold text-shadow-sm">
+						Up to <span className="text-[#B80000]">50%</span> discount this
+						season
+					</h1>
+					<SecondaryButton>Shop Now</SecondaryButton>
+				</div>
+			</HighlightContainer>
 		</>
 	)
 }

@@ -13,10 +13,7 @@ const Container = styled.div`
 	position: relative;
 
 	&::before {
-		content: 'Hello';
-		display: flex;
-		justify-center;
-		align-items: center;
+		content: '';
 		position: absolute;
 		width: 100%;
 		height: 100%;
