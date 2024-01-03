@@ -13,7 +13,10 @@ const Container = styled.div`
 	position: relative;
 
 	&::before {
-		content: '';
+		content: 'Hello';
+		display: flex;
+		justify-center;
+		align-items: center;
 		position: absolute;
 		width: 100%;
 		height: 100%;
@@ -39,8 +42,11 @@ export default function Hero() {
 	return (
 		<Container>
 			<img src={img.src} alt={img.alt} draggable={false} className="w-full" />
-			<div className="text-[3rem] text-white font-bold absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]">
+			<div className="flex flex-col items-center text-[3rem] text-white font-bold absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]">
 				<h1>Make the most out of your place</h1>
+				<p className="font-normal text-[1.5rem] mb-[1rem]">
+					Discover furniture that brings comfort to your home
+				</p>
 				<PrimaryButton>Shop Now</PrimaryButton>
 			</div>
 		</Container>

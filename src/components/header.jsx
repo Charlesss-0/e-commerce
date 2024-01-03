@@ -69,12 +69,14 @@ const Item = styled.li`
 	&:hover {
 		cursor: pointer;
 		color: #000;
+		font-weight: 600;
 	}
 
 	${props =>
 		props.$selected &&
 		`
 		color: #000;
+		font-weight: 600;
 
 		&:hover {
 			cursor: pointer;
