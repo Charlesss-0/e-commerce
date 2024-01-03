@@ -60,7 +60,7 @@ export default function Footer() {
 	}
 
 	return (
-		<footer>
+		<footer className="mt-[5rem]">
 			<ContactInfo>
 				<div>
 					<h1>GC</h1>

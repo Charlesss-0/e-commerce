@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import styled from 'styled-components'
+import { Link } from 'react-router-dom'
 
 const Header = styled.header`
 	background: none;
@@ -100,7 +101,7 @@ export default function HeaderContent() {
 		}
 	}, [isScrolled])
 
-	const menuItems = [{ name: 'Home' }, { name: 'Shop' }, { name: 'About' }]
+	const menuItems = ['Home', 'Shop', 'About']
 
 	const handleFocus = () => {
 		setFocus(!focus)
@@ -135,9 +136,9 @@ export default function HeaderContent() {
 
 			<ul className="flex gap-[1.5rem] mt-[2rem]">
 				{menuItems.map((item, index) => (
-					<Item key={index} $selected={index === 0}>
-						{item.name}
-					</Item>
+					<Link to={`/${item.toLowerCase()}`} key={index}>
+						<Item $selected={index === 0}>{item}</Item>
+					</Link>
 				))}
 			</ul>
 		</Header>

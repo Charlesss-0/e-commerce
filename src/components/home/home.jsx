@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import { PrimaryButton } from './hero'
-import { items } from './data/data'
+import { items } from '../data/data'
 
 const Featured = styled.div`
 	padding: 1rem;
@@ -60,7 +60,7 @@ const IconsContainer = styled.div`
 	}
 `
 
-export default function Main() {
+export default function Home() {
 	return (
 		<>
 			<Featured>
@@ -137,7 +137,7 @@ export default function Main() {
 					))}
 				</ul>
 
-				<button className="border-solid border border-black px-[1rem] py-[0.5rem] w-[max-content] self-center">
+				<button className="border-solid border border-black px-[1rem] py-[0.5rem] w-[max-content] self-center hover:bg-black hover:text-white transition-all duration-500">
 					Load more
 				</button>
 			</Products>
