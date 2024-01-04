@@ -2,6 +2,15 @@ import HeaderContent from '../home/header'
 import Footer from '../home/footer'
 import styled from 'styled-components'
 
+const sections = [
+	'All',
+	'Bedroom',
+	'Living Room',
+	'Kitchen',
+	'Workspace',
+	'Bathroom',
+]
+
 const Hero = styled.div`
 	background: url('https://images.unsplash.com/photo-1524758631624-e2822e304c36?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
 	background-size: cover;
@@ -57,7 +66,30 @@ const Button = styled.button`
 	}
 `
 
-export default function Shop() {
+const ProductsContainer = styled.div`
+	padding: 2rem;
+
+	& > div > ul > li {
+		background: #f3f3f3;
+		color: #2f2f2f;
+		padding: 0.5rem 1.5rem;
+		border-radius: 50em;
+		backdrop-filter: blur(10px);
+		transition: all 200ms;
+		user-select: none;
+
+		&:hover {
+			cursor: pointer;
+			opacity: 0.7;
+		}
+
+		&:active {
+			transform: scale(0.9);
+		}
+	}
+`
+
+export default function Products() {
 	return (
 		<>
 			<HeaderContent />
@@ -70,6 +102,20 @@ export default function Shop() {
 					<span>View Products</span>
 				</Button>
 			</Hero>
+			<ProductsContainer>
+				<h1 className="text-[1.5rem] mb-[2rem]">Get Inspired</h1>
+				<div className="flex justify-between">
+					<ul className="flex gap-[0.5rem]">
+						{sections.map((section, index) => (
+							<li key={index}>{section}</li>
+						))}
+					</ul>
+					<div className="flex items-center gap-[1.5rem] text-[1.3rem] text-[#5f5f5f] [&>i]:hover:cursor-pointer">
+						<i className="fi fi-rr-apps flex"></i>
+						<i className="fi fi-rr-settings-sliders flex"></i>
+					</div>
+				</div>
+			</ProductsContainer>
 			<Footer />
 		</>
 	)

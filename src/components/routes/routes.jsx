@@ -1,10 +1,9 @@
-import React from 'react'
 import { createBrowserRouter } from 'react-router-dom'
 import App from '../../App'
 import Error from '../../error'
-import Shop from '../shop/shop'
+import Products from '../shop/products'
 
-const router = createBrowserRouter([
+const routes = [
 	{
 		path: '/',
 		element: <App />,
@@ -15,9 +14,11 @@ const router = createBrowserRouter([
 		element: <App />,
 	},
 	{
-		path: 'shop/',
-		element: <Shop />,
+		path: 'products/',
+		element: <Products />,
 	},
-])
+]
 
-export default router
+const Routes = createBrowserRouter(routes)
+
+export default Routes

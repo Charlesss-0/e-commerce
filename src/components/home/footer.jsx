@@ -5,6 +5,7 @@ const ContactInfo = styled.div`
 	justify-content: center;
 	gap: 2rem;
 	background: #b6c4b6;
+	background: #f1efef;
 	padding: 2rem 0;
 
 	& > div {
