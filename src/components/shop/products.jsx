@@ -1,15 +1,8 @@
 import HeaderContent from '../home/header'
 import Footer from '../home/footer'
 import styled from 'styled-components'
-
-const sections = [
-	'All',
-	'Bedroom',
-	'Living Room',
-	'Kitchen',
-	'Workspace',
-	'Bathroom',
-]
+import { products } from '../data/data'
+import { useEffect } from 'react'
 
 const Hero = styled.div`
 	background: url('https://images.unsplash.com/photo-1524758631624-e2822e304c36?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
@@ -89,7 +82,31 @@ const ProductsContainer = styled.div`
 	}
 `
 
+const ListContainer = styled.div`
+	padding: 1rem;
+	margin-top: 5rem;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-evenly;
+	gap: 1rem;
+
+	& > img {
+		width: 300px;
+		object-fit: cover;
+		border-radius: 0.5rem;
+	}
+`
+
 export default function Products() {
+	const sections = [
+		'All',
+		'Bedroom',
+		'Living Room',
+		'Kitchen',
+		'Workspace',
+		'Bathroom',
+	]
+
 	return (
 		<>
 			<HeaderContent />
@@ -115,8 +132,21 @@ export default function Products() {
 						<i className="fi fi-rr-settings-sliders flex"></i>
 					</div>
 				</div>
+				<ListContainer>
+					<Items />
+				</ListContainer>
 			</ProductsContainer>
 			<Footer />
+		</>
+	)
+}
+
+function Items() {
+	return (
+		<>
+			{products.map(category =>
+				category.items.map((item, index) => <img key={index} src={item.img} />)
+			)}
 		</>
 	)
 }

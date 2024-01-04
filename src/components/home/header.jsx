@@ -84,6 +84,8 @@ const Item = styled.li`
 `
 
 export default function HeaderContent() {
+	const menuItems = ['Home', 'Products', 'About']
+
 	const location = useLocation()
 	const [isScrolled, setIsScrolled] = useState(0)
 	const [focus, setFocus] = useState(false)
@@ -99,8 +101,6 @@ export default function HeaderContent() {
 			window.removeEventListener('scroll', handleScroll)
 		}
 	}, [isScrolled])
-
-	const menuItems = ['Home', 'Products', 'About']
 
 	const handleFocus = () => {
 		setFocus(!focus)

@@ -28,7 +28,7 @@ const ContactInfo = styled.div`
 
 	& > div > p,
 	& > div > ul > li {
-		color: #2f2f2f;
+		color: #3f3f3f;
 	}
 
 	& > div > ul > li:hover {

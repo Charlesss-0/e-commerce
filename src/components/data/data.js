@@ -59,3 +59,37 @@ export const items = {
 		},
 	],
 }
+
+export const products = [
+	{
+		category: 'Sofas',
+		items: [
+			{
+				img: 'https://th.bing.com/th/id/OIG.1SJeQuTu6P9JcUD832cX?w=1024&h=1024&rs=1&pid=ImgDetMain',
+			},
+			{
+				img: 'https://th.bing.com/th/id/OIG.KZkJiOv7sHD5g9cPHpft?pid=ImgGn',
+			},
+			{
+				img: 'https://th.bing.com/th/id/OIG.g.F7hL81ejA2D1M_ACcE?pid=ImgGn',
+			},
+			{
+				img: 'https://th.bing.com/th/id/OIG.wg1jGmGlQUDwXCkboYlY?pid=ImgGn',
+			},
+			{
+				img: 'https://th.bing.com/th/id/OIG.Ii8WNx3SVSaMIm6JAiAJ?pid=ImgGn',
+			},
+			{
+				img: 'https://th.bing.com/th/id/OIG.g_PbsTbTbMtbY3BhsXC0?pid=ImgGn',
+			},
+		],
+	},
+	{
+		category: 'Chairs',
+		items: [
+			{
+				img: 'https://th.bing.com/th/id/OIG.VFt1gRjyUhaVSkyPJ3X5?pid=ImgGn',
+			},
+		],
+	},
+]
