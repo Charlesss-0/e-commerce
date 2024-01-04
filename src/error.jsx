@@ -47,7 +47,7 @@ export default function Error() {
 				<h1 className="text-[5rem] font-bold">Oops!</h1>
 				<p className="text-[2rem]">Sorry, an unexpected error has occurred.</p>
 				<p className="italic">{error.statusText || error.message}</p>
-				<Link to={'home/'}>
+				<Link to={'/'}>
 					<Button>Go Home</Button>
 				</Link>
 			</div>

@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import styled from 'styled-components'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 
 const Header = styled.header`
 	background: none;
@@ -86,6 +86,7 @@ const Item = styled.li`
 `
 
 export default function HeaderContent() {
+	const location = useLocation()
 	const [isScrolled, setIsScrolled] = useState(0)
 	const [focus, setFocus] = useState(false)
 
@@ -110,7 +111,9 @@ export default function HeaderContent() {
 	return (
 		<Header $primary={isScrolled}>
 			<div className="flex items-center pl-[1rem]">
-				<h1 className="grow text-[2rem] font-bold tracking-[0.3rem]">GC</h1>
+				<h1 className="grow text-[2rem] font-bold tracking-[0.3rem]">
+					<Link to={'/'}>GC</Link>
+				</h1>
 
 				<SearchField
 					onFocus={handleFocus}
@@ -137,7 +140,14 @@ export default function HeaderContent() {
 			<ul className="flex gap-[1.5rem] mt-[2rem]">
 				{menuItems.map((item, index) => (
 					<Link to={`/${item.toLowerCase()}`} key={index}>
-						<Item $selected={index === 0}>{item}</Item>
+						<Item
+							$selected={
+								location.pathname.includes(`/${item.toLowerCase()}`) ||
+								(location.pathname === '/' && item.toLowerCase() === 'home')
+							}
+						>
+							{item}
+						</Item>
 					</Link>
 				))}
 			</ul>
