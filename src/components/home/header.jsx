@@ -10,7 +10,7 @@ const Header = styled.header`
 	top: 0;
 	width: 100%;
 	padding: 1rem;
-	z-index: 1;
+	z-index: 20;
 	transition: all 500ms;
 
 	&:hover {
