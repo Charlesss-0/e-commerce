@@ -66,21 +66,33 @@ export const products = [
 		items: [
 			{
 				img: 'https://th.bing.com/th/id/OIG.1SJeQuTu6P9JcUD832cX?w=1024&h=1024&rs=1&pid=ImgDetMain',
+				details: 'Modern Green Sofa',
+				price: 100,
 			},
 			{
 				img: 'https://th.bing.com/th/id/OIG.KZkJiOv7sHD5g9cPHpft?pid=ImgGn',
+				details: 'Minimalistic Grey Sofa',
+				price: 100,
 			},
 			{
 				img: 'https://th.bing.com/th/id/OIG.g.F7hL81ejA2D1M_ACcE?pid=ImgGn',
+				details: 'Stylish Grey Sofa',
+				price: 100,
 			},
 			{
 				img: 'https://th.bing.com/th/id/OIG.wg1jGmGlQUDwXCkboYlY?pid=ImgGn',
+				details: 'Minimalistic Grey Sofa',
+				price: 100,
 			},
 			{
 				img: 'https://th.bing.com/th/id/OIG.Ii8WNx3SVSaMIm6JAiAJ?pid=ImgGn',
+				details: 'Modern White Sofa',
+				price: 100,
 			},
 			{
 				img: 'https://th.bing.com/th/id/OIG.g_PbsTbTbMtbY3BhsXC0?pid=ImgGn',
+				details: 'Simple White Sofa',
+				price: 100,
 			},
 		],
 	},
@@ -89,18 +101,53 @@ export const products = [
 		items: [
 			{
 				img: 'https://th.bing.com/th/id/OIG.VFt1gRjyUhaVSkyPJ3X5?pid=ImgGn',
+				details: 'Wooden White Chair',
+				price: 100,
 			},
 			{
 				img: 'https://th.bing.com/th/id/OIG.IC3kkrtEq9PKkPwNEeei?pid=ImgGn',
+				details: 'Beige Upholstery Chair',
+				price: 100,
 			},
 			{
 				img: 'https://th.bing.com/th/id/OIG.olptM.bASe4njs6Pl0lb?pid=ImgGn',
+				details: 'Beige Chair (no Armrests)',
+				price: 100,
 			},
 			{
 				img: 'https://th.bing.com/th/id/OIG.BcIGhRCcFgFC4UBr7uLw?pid=ImgGn',
+				details: 'Wooden Beige Armrest-Equipped Chair',
+				price: 100,
 			},
 			{
 				img: 'https://th.bing.com/th/id/OIG..oF1tdj1OiWNszCi0HcX?pid=ImgGn',
+				details: 'Chair with Soft Back Support',
+				price: 100,
+			},
+		],
+	},
+	{
+		category: 'Beds',
+		items: [
+			{
+				img: 'https://th.bing.com/th/id/OIG.5rxYR7We7FaFj7GViVDM?pid=ImgGn',
+				details: 'Bedroom Set',
+				price: 100,
+			},
+			{
+				img: 'https://th.bing.com/th/id/OIG.QOW3X83ZJZsdeB.dAG1x?pid=ImgGn',
+				details: 'White Wooden Bed',
+				price: 100,
+			},
+			{
+				img: 'https://th.bing.com/th/id/OIG.ZRQOeViJmBqqNEdrL6aa?pid=ImgGn',
+				details: 'Beige Bed Frame',
+				price: 100,
+			},
+			{
+				img: 'https://th.bing.com/th/id/OIG.H6rnSGWxpjrIM92K02fR?pid=ImgGn',
+				details: 'Beige Bedroom Set',
+				price: 100,
 			},
 		],
 	},

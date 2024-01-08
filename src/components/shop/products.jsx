@@ -89,6 +89,10 @@ const ListContainer = styled.div`
 	justify-content: space-evenly;
 	gap: 1rem;
 
+	& > div {
+		width: 300px;
+	}
+
 	& > div > img {
 		width: 300px;
 		object-fit: cover;
@@ -119,7 +123,6 @@ export default function Products() {
 				</Button>
 			</Hero>
 			<ProductsContainer>
-				<h1 className="text-[1.5rem] mb-[2rem]">Get Inspired</h1>
 				<div className="flex justify-between">
 					<ul className="flex gap-[0.5rem]">
 						{sections.map((section, index) => (
@@ -145,9 +148,10 @@ function Items() {
 		<>
 			{products.map(category =>
 				category.items.map((item, index) => (
-					<div>
-						<img key={index} src={item.img} />
-						<p>{item.details}</p>
+					<div key={index}>
+						<img src={item.img} />
+						<p className="text-[0.8rem] mt-[1rem]">{item.details}</p>
+						<p>$ {item.price}</p>
 					</div>
 				))
 			)}

@@ -10,6 +10,10 @@ const Container = styled.div`
 	transition: all 500ms;
 	position: relative;
 
+	& > div > * {
+		color: #fff;
+	}
+
 	& > img {
 		position: absolute;
 		top: 50%;
@@ -35,7 +39,6 @@ const Container = styled.div`
 	& > div > h1 {
 		font-size: 3rem;
 		font-weight: bold;
-		color: #2f2f2f;
 	}
 
 	& > div > p {
@@ -62,6 +65,7 @@ const PrimaryButton = styled.button`
 	overflow: hidden;
 
 	& > span {
+		color: #2f2f2f;
 		position: relative;
 		z-index: 2;
 	}

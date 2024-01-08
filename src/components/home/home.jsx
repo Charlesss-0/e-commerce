@@ -34,7 +34,7 @@ const Products = styled.div`
 const Button = styled.button`
 	padding: 0.5rem 1rem;
 	font-size: 1rem;
-	background: #161a30;
+	background: #113946;
 	color: #fff;
 	border: none;
 	border-radius: 0.5rem;
