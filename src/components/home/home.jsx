@@ -1,5 +1,4 @@
 import styled from 'styled-components'
-import { PrimaryButton } from './hero'
 import { items } from '../data/data'
 
 const Featured = styled.div`
@@ -32,9 +31,10 @@ const Products = styled.div`
 	padding: 1rem;
 `
 
-const SecondaryButton = styled(PrimaryButton)`
+const Button = styled.button`
+	padding: 0.5rem 1rem;
 	font-size: 1rem;
-	background: #000;
+	background: #161a30;
 	color: #fff;
 	border: none;
 	border-radius: 0.5rem;
@@ -105,7 +105,7 @@ export default function Home() {
 					<p className="text-[1.3rem]">
 						Long lasting and comfortable to use. This is for you.
 					</p>
-					<SecondaryButton>Shop Now</SecondaryButton>
+					<Button>Shop Now</Button>
 				</div>
 			</HighlightContainer>
 
@@ -149,7 +149,7 @@ export default function Home() {
 						Up to <span className="text-[#B80000]">50%</span> discount this
 						season
 					</h1>
-					<SecondaryButton>Shop Now</SecondaryButton>
+					<Button>Shop Now</Button>
 				</div>
 			</HighlightContainer>
 		</>

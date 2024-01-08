@@ -90,6 +90,18 @@ export const products = [
 			{
 				img: 'https://th.bing.com/th/id/OIG.VFt1gRjyUhaVSkyPJ3X5?pid=ImgGn',
 			},
+			{
+				img: 'https://th.bing.com/th/id/OIG.IC3kkrtEq9PKkPwNEeei?pid=ImgGn',
+			},
+			{
+				img: 'https://th.bing.com/th/id/OIG.olptM.bASe4njs6Pl0lb?pid=ImgGn',
+			},
+			{
+				img: 'https://th.bing.com/th/id/OIG.BcIGhRCcFgFC4UBr7uLw?pid=ImgGn',
+			},
+			{
+				img: 'https://th.bing.com/th/id/OIG..oF1tdj1OiWNszCi0HcX?pid=ImgGn',
+			},
 		],
 	},
 ]

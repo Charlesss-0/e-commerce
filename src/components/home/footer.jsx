@@ -13,6 +13,7 @@ const ContactInfo = styled.div`
 	}
 
 	& > div h1 {
+		color: #000;
 		font-size: 1.8rem;
 		margin-bottom: 1rem;
 	}
@@ -118,7 +119,7 @@ export default function Footer() {
 				</div>
 			</ContactInfo>
 
-			<div className="flex justify-between px-[5rem] py-[1rem]">
+			<div className="flex justify-between px-[5rem] py-[1rem] text-[#000]">
 				<a
 					href="https://github.com/Charlesss-0"
 					target="_blank"

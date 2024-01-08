@@ -11,20 +11,20 @@ const Header = styled.header`
 	width: 100%;
 	padding: 1rem;
 	z-index: 20;
-	transition: all 500ms;
+	transition: all 400ms;
 
 	&:hover {
-		background: #fff3;
+		background: #fffa;
 		box-shadow: 1px 1px 5px #0005;
-		backdrop-filter: blur(10px);
+		backdrop-filter: blur(1rem);
 	}
 
 	${props =>
 		props.$primary &&
 		`
-	background: #fff3;
+	background: #fffa;
 	box-shadow: 1px 1px 5px #0005;
-	backdrop-filter: blur(10px);
+	backdrop-filter: blur(1rem);
 	`}
 `
 
@@ -35,7 +35,7 @@ const SearchField = styled.div`
 	align-items: center;
 	gap: 1rem;
 	background: #fff;
-	border: 1px solid #aaa;
+	outline: 1px solid #afafaf;
 	border-radius: 100em;
 	transition: all 500ms;
 
@@ -65,7 +65,7 @@ const SearchInput = styled.input`
 
 const Item = styled.li`
 	padding: 0.3rem 1rem;
-	color: #2f2f2f;
+	color: #5f5f5f;
 
 	&:hover {
 		cursor: pointer;
@@ -129,9 +129,9 @@ export default function HeaderContent() {
 				</SearchField>
 
 				<div className="flex items-center gap-[1.5rem] ml-[3rem] [&>i]:text-[1.3rem] [&>i]:hover:cursor-pointer">
-					<i className="fi fi-rr-shopping-cart"></i>
+					<i className="fi fi-rr-briefcase-blank"></i>
 					<i className="fi fi-rr-heart"></i>
-					<i className="fi fi-rr-circle-user"></i>
+					<i className="fi fi-rr-user"></i>
 				</div>
 			</div>
 

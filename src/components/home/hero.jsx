@@ -10,38 +10,92 @@ const Container = styled.div`
 	transition: all 500ms;
 	position: relative;
 
+	& > img {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		height: 90vh;
+		z-index: 1;
+	}
+
+	& > div {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		color: #000;
+		position: absolute;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
+	}
+
+	& > div > h1 {
+		font-size: 3rem;
+		font-weight: bold;
+		color: #2f2f2f;
+	}
+
+	& > div > p {
+		font-size: 1.5rem;
+	}
+
 	&::before {
 		content: '';
 		position: absolute;
 		width: 100%;
 		height: 100%;
-		background: rgb(89 126 82 / 0.4);
+		background: #597e5244;
 	}
 `
 
-export const PrimaryButton = styled.button`
+const PrimaryButton = styled.button`
 	margin-top: 2vh;
-	font-size: 1.8rem;
-	border: 2px solid #fff;
+	font-size: 1.5rem;
+	border-radius: 0.5rem;
 	padding: 0.5rem 1.5rem;
-	transition: all 500ms;
+	transition: all 400ms;
 	font-weight: 600;
+	position: relative;
+	overflow: hidden;
+
+	& > span {
+		position: relative;
+		z-index: 2;
+	}
 
 	&:hover {
-		background: #fff;
-		color: #2f2f2f;
+		outline: 1px solid #efefef;
+	}
+
+	&::before {
+		content: '';
+		position: absolute;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
+		background: #fffa;
+		transition: all 500ms;
+		z-index: 1;
+	}
+
+	&:hover::before {
+		transform: translateY(100%);
 	}
 `
 
 export default function Hero() {
 	return (
 		<Container>
-			<div className="flex flex-col items-center text-[3rem] text-white font-bold absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]">
+			<div>
 				<h1>Make the most out of your place</h1>
-				<p className="font-normal text-[1.5rem] mb-[1rem]">
-					Discover furniture that brings comfort to your home
-				</p>
-				<PrimaryButton>Shop Now</PrimaryButton>
+				<p>Discover furniture that brings comfort to your home</p>
+				<PrimaryButton>
+					<span>Shop Now</span>
+				</PrimaryButton>
 			</div>
 		</Container>
 	)

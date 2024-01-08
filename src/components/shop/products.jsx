@@ -2,7 +2,6 @@ import HeaderContent from '../home/header'
 import Footer from '../home/footer'
 import styled from 'styled-components'
 import { products } from '../data/data'
-import { useEffect } from 'react'
 
 const Hero = styled.div`
 	background: url('https://images.unsplash.com/photo-1524758631624-e2822e304c36?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
@@ -90,7 +89,7 @@ const ListContainer = styled.div`
 	justify-content: space-evenly;
 	gap: 1rem;
 
-	& > img {
+	& > div > img {
 		width: 300px;
 		object-fit: cover;
 		border-radius: 0.5rem;
@@ -145,7 +144,12 @@ function Items() {
 	return (
 		<>
 			{products.map(category =>
-				category.items.map((item, index) => <img key={index} src={item.img} />)
+				category.items.map((item, index) => (
+					<div>
+						<img key={index} src={item.img} />
+						<p>{item.details}</p>
+					</div>
+				))
 			)}
 		</>
 	)
