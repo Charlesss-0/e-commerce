@@ -34,13 +34,13 @@ const Products = styled.div`
 const Button = styled.button`
 	padding: 0.5rem 1rem;
 	font-size: 1rem;
-	background: #113946;
+	background: #1f1717;
 	color: #fff;
 	border: none;
 	border-radius: 0.5rem;
 `
 
-const IconsContainer = styled.div`
+export const IconsContainer = styled.div`
 	display: flex;
 	align-items: center;
 	gap: 0.5rem;
@@ -102,7 +102,7 @@ export default function Home() {
 					<h1 className="text-[2rem] font-bold">
 						Brown wooden framed yellow padded chair
 					</h1>
-					<p className="text-[1.3rem]">
+					<p className="text-[1.3rem] mb-[2rem]">
 						Long lasting and comfortable to use. This is for you.
 					</p>
 					<Button>Shop Now</Button>
@@ -145,7 +145,7 @@ export default function Home() {
 			<HighlightContainer>
 				<img src="https://images.unsplash.com/photo-1594026112284-02bb6f3352fe?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" />
 				<div className="absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] flex flex-col items-center">
-					<h1 className=" text-white text-[3rem] font-bold text-shadow-sm">
+					<h1 className=" text-white text-[3rem] font-bold text-shadow-sm mb-[2rem]">
 						Up to <span className="text-[#B80000]">50%</span> discount this
 						season
 					</h1>

@@ -9,26 +9,13 @@ const Container = styled.div`
 	width: 100%;
 	transition: all 500ms;
 	position: relative;
-
-	& > div > * {
-		color: #fff;
-	}
-
-	& > img {
-		position: absolute;
-		top: 50%;
-		left: 50%;
-		transform: translate(-50%, -50%);
-		height: 90vh;
-		z-index: 1;
-	}
+	color: #ddf2fd;
 
 	& > div {
 		display: flex;
 		flex-direction: column;
 		align-items: center;
 		justify-content: center;
-		color: #000;
 		position: absolute;
 		top: 0;
 		right: 0;
@@ -37,12 +24,13 @@ const Container = styled.div`
 	}
 
 	& > div > h1 {
-		font-size: 3rem;
+		font-size: 3.5rem;
 		font-weight: bold;
 	}
 
 	& > div > p {
 		font-size: 1.5rem;
+		font-weight: bold;
 	}
 
 	&::before {
@@ -59,19 +47,25 @@ const PrimaryButton = styled.button`
 	font-size: 1.5rem;
 	border-radius: 0.5rem;
 	padding: 0.5rem 1.5rem;
-	transition: all 400ms;
+	transition: all 500ms;
 	font-weight: 600;
 	position: relative;
 	overflow: hidden;
+	outline: none;
 
 	& > span {
-		color: #2f2f2f;
+		color: #ddf2fd;
+		text-shadow: 1px 1px 3px #000a;
 		position: relative;
 		z-index: 2;
 	}
 
 	&:hover {
 		outline: 1px solid #efefef;
+	}
+
+	&:active {
+		transform: scale(0.9);
 	}
 
 	&::before {
@@ -81,7 +75,7 @@ const PrimaryButton = styled.button`
 		right: 0;
 		bottom: 0;
 		left: 0;
-		background: #fffa;
+		background: #3f230599;
 		transition: all 500ms;
 		z-index: 1;
 	}
@@ -95,8 +89,10 @@ export default function Hero() {
 	return (
 		<Container>
 			<div>
-				<h1>Make the most out of your place</h1>
-				<p>Discover furniture that brings comfort to your home</p>
+				<h1 className="text-shadow-sm">Make the most out of your place</h1>
+				<p className="text-shadow-sm">
+					Discover furniture that brings comfort to your home
+				</p>
 				<PrimaryButton>
 					<span>Shop Now</span>
 				</PrimaryButton>

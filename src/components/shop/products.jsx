@@ -1,7 +1,8 @@
 import HeaderContent from '../home/header'
 import Footer from '../home/footer'
-import styled from 'styled-components'
+import styled, { keyframes } from 'styled-components'
 import { products } from '../data/data'
+import { IconsContainer } from '../home/home'
 
 const Hero = styled.div`
 	background: url('https://images.unsplash.com/photo-1524758631624-e2822e304c36?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
@@ -19,11 +20,22 @@ const Hero = styled.div`
 		position: absolute;
 		width: 100%;
 		height: 100%;
-		background: #739072aa;
 	}
 
 	& > * {
 		z-index: 1;
+	}
+`
+
+const gradient = keyframes`
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
 	}
 `
 
@@ -44,17 +56,26 @@ const Button = styled.button`
 		outline: 1px solid #fff;
 	}
 
-	&:hover div {
-		transform: translateX(-100%);
-	}
-
 	& > span {
+		position: relative;
 		z-index: 1;
 	}
 
-	& > div {
-		z-index: -1;
+	&::before {
+		content: '';
+		background: linear-gradient(45deg, #1b4242, #5c8374, #4f6f52);
+		background-size: 200vw 200vh;
+		position: absolute;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
 		transition: all 500ms;
+		animation: ${gradient} 5s linear infinite;
+	}
+
+	&:hover::before {
+		transform: translateY(100%);
 	}
 `
 
@@ -83,21 +104,10 @@ const ProductsContainer = styled.div`
 
 const ListContainer = styled.div`
 	padding: 1rem;
-	margin-top: 5rem;
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: space-evenly;
 	gap: 1rem;
-
-	& > div {
-		width: 300px;
-	}
-
-	& > div > img {
-		width: 300px;
-		object-fit: cover;
-		border-radius: 0.5rem;
-	}
 `
 
 export default function Products() {
@@ -114,12 +124,11 @@ export default function Products() {
 		<>
 			<HeaderContent />
 			<Hero>
-				<h1 className="text-[3rem] text-[#fff] font-bold">
+				<h1 className="text-[4.5rem] text-[#fff] font-bold text-shadow-sm">
 					Up to <span className="text-[#B80000]">50%</span> discount this season
 				</h1>
 				<Button>
-					<div className="bg-[#607274] absolute top-0 left-0 right-0 bottom-0"></div>
-					<span>View Products</span>
+					<span className="text-shadow-sm">View Products</span>
 				</Button>
 			</Hero>
 			<ProductsContainer>
@@ -148,10 +157,23 @@ function Items() {
 		<>
 			{products.map(category =>
 				category.items.map((item, index) => (
-					<div key={index}>
-						<img src={item.img} />
-						<p className="text-[0.8rem] mt-[1rem]">{item.details}</p>
-						<p>$ {item.price}</p>
+					<div key={index} className="mt-[5rem]">
+						<div className="w-[300px] overflow-hidden rounded-[0.5rem] hover:cursor-pointer">
+							<img
+								src={item.img}
+								className="hover:scale-105 transition-all duration-[400ms]"
+							/>
+						</div>
+						<div className="flex justify-between mt-[1rem]">
+							<div className="w-[200px] flex flex-col gap-[0.5rem] text-[0.8rem]">
+								<p>{item.details}</p>
+								<p>$ {item.price}</p>
+							</div>
+							<IconsContainer>
+								<i className="fi fi-rr-shopping-cart"></i>
+								<i className="fi fi-rr-heart"></i>
+							</IconsContainer>
+						</div>
 					</div>
 				))
 			)}
