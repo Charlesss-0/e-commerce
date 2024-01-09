@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import { items } from '../data/data'
+import { Outlet } from 'react-router-dom'
 
 const Featured = styled.div`
 	padding: 1rem;
@@ -152,6 +153,8 @@ export default function Home() {
 					<Button>Shop Now</Button>
 				</div>
 			</HighlightContainer>
+
+			<Outlet />
 		</>
 	)
 }

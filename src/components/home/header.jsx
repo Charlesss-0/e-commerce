@@ -129,7 +129,9 @@ export default function HeaderContent() {
 				</SearchField>
 
 				<div className="flex items-center gap-[1.5rem] ml-[3rem] [&>i]:text-[1.3rem] [&>i]:hover:cursor-pointer">
-					<i className="fi fi-rr-briefcase-blank"></i>
+					<Link to={`cart`}>
+						<i className="fi fi-rr-briefcase-blank"></i>
+					</Link>
 					<i className="fi fi-rr-heart"></i>
 					<i className="fi fi-rr-user"></i>
 				</div>
