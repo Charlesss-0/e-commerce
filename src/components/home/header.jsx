@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import { Link, useLocation } from 'react-router-dom'
+import { useCart } from '../context/context'
 
 const Header = styled.header`
 	background: none;
@@ -89,6 +90,7 @@ export default function HeaderContent() {
 	const location = useLocation()
 	const [isScrolled, setIsScrolled] = useState(0)
 	const [focus, setFocus] = useState(false)
+	const { hide, setHide } = useCart()
 
 	useEffect(() => {
 		const handleScroll = () => {
@@ -130,7 +132,10 @@ export default function HeaderContent() {
 
 				<div className="flex items-center gap-[1.5rem] ml-[3rem] [&>i]:text-[1.3rem] [&>i]:hover:cursor-pointer">
 					<Link to={`cart`}>
-						<i className="fi fi-rr-briefcase-blank"></i>
+						<i
+							className="fi fi-rr-briefcase-blank"
+							onClick={() => setHide(!hide)}
+						></i>
 					</Link>
 					<i className="fi fi-rr-heart"></i>
 					<i className="fi fi-rr-user"></i>

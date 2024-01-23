@@ -2,6 +2,7 @@ import styled from 'styled-components'
 import { IconsContainer } from '../home/home'
 import { useEffect, useState } from 'react'
 import FirebaseApp from '../../firebase/firebase'
+import { useCart } from '../context/context'
 
 const Container = styled.div`
 	background: #fafafa99;
@@ -26,6 +27,7 @@ export function Cart() {
 	const firebaseApp = new FirebaseApp()
 	const [count, setCount] = useState(1)
 	const [userData, setUserData] = useState([])
+	const { hide, setHide } = useCart()
 
 	const handleData = (setData, data) => {
 		setData(data)
@@ -44,7 +46,13 @@ export function Cart() {
 	}
 
 	return (
-		<Container>
+		<Container className={hide ? 'hidden' : 'block'}>
+			<h1
+				className="text-end px-[1rem] mb-[1rem] hover:cursor-pointer"
+				onClick={() => setHide(!hide)}
+			>
+				Close
+			</h1>
 			<ul className="flex flex-col gap-[1rem]">
 				{userData.map(({ key, value }) => (
 					<li
