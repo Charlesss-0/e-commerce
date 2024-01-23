@@ -17,6 +17,7 @@ const Container = styled.div`
 	transform: translate(-50%, -50%);
 	overflow: auto;
 	z-index: 20;
+	scrollbar-width: 0;
 
 	&::-webkit-scrollbar {
 		display: none;
@@ -29,7 +30,7 @@ const Overlay = styled.div`
 	left: 0;
 	width: 100vw;
 	height: 100vh;
-	z-index: 30;
+	z-index: 20;
 	overflow: hidden;
 	background-color: #000a;
 `
@@ -67,12 +68,27 @@ export function Cart() {
 	return (
 		<Overlay className={hide ? 'block' : 'hidden'}>
 			<Container className={hide ? 'block' : 'hidden'}>
-				<h1
-					className="text-end px-[1rem] mb-[1rem] hover:cursor-pointer"
-					onClick={() => setHide(!hide)}
-				>
-					Close
-				</h1>
+				<div className="sticky top-0 mb-[1rem]">
+					<div className="flex justify-end">
+						<i
+							onClick={() => setHide(!hide)}
+							className="
+								fi fi-rr-cross-circle 
+								text-[1.5rem] 
+								rounded-full 
+								p-[0.5rem] 
+								bg-[#efefefaa] 
+								box-shadow 
+								hover:bg-[#2f2f2faa] 
+								hover:text-white 
+								hover:cursor-pointer 
+								transition-all 
+								duration-400
+								"
+						></i>
+					</div>
+				</div>
+
 				<ul className="flex flex-col gap-[1rem]">
 					{userData.map(({ key, value }) => (
 						<li
