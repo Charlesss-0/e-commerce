@@ -1,0 +1,124 @@
+/* HEADER SECTION */
+
+/* HEADER SECTION */
+
+/* HOME SECTION */
+
+.hero {
+	background: url(https://images.unsplash.com/photo-1524758631624-e2822e304c36?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D);
+	background-size: cover;
+	background-position: center;
+	height: 100vh;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	gap: 1rem;
+
+	&::before {
+		content: '';
+		position: absolute;
+		width: 100%;
+		height: 100%;
+	}
+
+	& > * {
+		z-index: 1;
+	}
+}
+
+.Button {
+	color: #fff;
+	font-size: 1.5rem;
+	border-radius: 10px;
+	position: relative;
+	overflow: hidden;
+	padding: 0.5rem 1.5rem;
+	transition: all 500ms;
+
+	&:active {
+		transform: scale(0.9);
+	}
+
+	&:hover {
+		outline: 1px solid #fff;
+	}
+
+	& > span {
+		position: relative;
+		z-index: 1;
+	}
+
+	&::before {
+		content: '';
+		background: linear-gradient(45deg, #1b4242, #5c8374, #4f6f52);
+		background-size: 200vw 200vh;
+		position: absolute;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
+		transition: all 500ms;
+		animation: gradient 5s linear infinite;
+	}
+
+	&:hover::before {
+		transform: translateY(100%);
+	}
+}
+
+@keyframes gradient {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
+}
+
+.productsContainer {
+	padding: 2rem;
+
+	& > div:nth-child(1) {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+	}
+
+	& > div > ul > li {
+		background: #f3f3f3;
+		color: #2f2f2f;
+		height: min-content;
+		padding: 0.5rem 1.5rem;
+		border-radius: 50em;
+		backdrop-filter: blur(10px);
+		transition: all 200ms;
+		user-select: none;
+
+		&:hover {
+			cursor: pointer;
+			opacity: 0.7;
+		}
+
+		&:active {
+			transform: scale(0.9);
+		}
+	}
+}
+
+.listContainer {
+	padding: 1rem;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-evenly;
+	gap: 1rem;
+}
+
+/* HOME SECTION */
+
+/* FOOTER SECTION */
+
+/* FOOTER SECTION */

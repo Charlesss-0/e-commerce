@@ -2,7 +2,7 @@ import { createBrowserRouter } from 'react-router-dom'
 import App from '../../App'
 import Error from '../../error'
 import Products from '../shop/products'
-import { Cart } from '../user/cart'
+import { Cart } from '../orders/cart'
 
 const routes = [
 	{

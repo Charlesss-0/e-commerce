@@ -112,7 +112,21 @@ export default function Footer() {
 							placeholder="email"
 							className="rounded-[1em] px-[1rem] py-[0.3rem] outline-none"
 						/>
-						<button className="bg-[#637E76] px-[1rem] py-[0.3rem] rounded-[1rem] ml-[1rem] text-white hover:cursor-pointer hover:opacity-80 active:scale-95 transition-all duration-100">
+						<button
+							className="
+								bg-[#637E76] 
+								px-[1rem] 
+								py-[0.3rem] 
+								rounded-[1rem] 
+								ml-[1rem] 
+								text-white 
+								hover:cursor-pointer 
+								hover:opacity-80 
+								active:scale-95 
+								transition-all 
+								duration-100
+								"
+						>
 							Send
 						</button>
 					</form>

@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 import { IconsContainer } from '../home/home'
 import { useEffect, useState } from 'react'
+import FirebaseApp from '../../firebase/firebase'
 
 const Container = styled.div`
 	background: #fafafa99;
@@ -13,11 +14,26 @@ const Container = styled.div`
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
+	overflow: auto;
 	z-index: 20;
+
+	&::-webkit-scrollbar {
+		display: none;
+	}
 `
 
 export function Cart() {
+	const firebaseApp = new FirebaseApp()
 	const [count, setCount] = useState(1)
+	const [userData, setUserData] = useState([])
+
+	const handleData = (setData, data) => {
+		setData(data)
+	}
+
+	useEffect(() => {
+		firebaseApp.fetch(handleData, setUserData)
+	}, [firebaseApp.database])
 
 	const handleAdd = () => {
 		setCount(count => (count < 100 ? count + 1 : 100))
@@ -29,32 +45,47 @@ export function Cart() {
 
 	return (
 		<Container>
-			<div>
-				<ul>
-					<li className="flex justify-between items-center p-[0.8rem] rounded-[0.5rem] bg-[#efefef] box-shadow">
+			<ul className="flex flex-col gap-[1rem]">
+				{userData.map(({ key, value }) => (
+					<li
+						key={key}
+						className="
+							flex 
+							justify-between 
+							items-center 
+							p-[0.8rem] 
+							rounded-[0.5rem] 
+							bg-[#efefef] 
+							box-shadow
+							"
+					>
 						<div className="flex gap-[1rem] text-[0.8rem] [&>img]:w-[100px] [&>img]:rounded-[0.3rem] [&>img]:border-solid [&>img]:border-2 [&>img]:border-[#aaa]">
-							<img src="https://th.bing.com/th/id/OIG.1SJeQuTu6P9JcUD832cX?w=1024&h=1024&rs=1&pid=ImgDetMain" />
+							<img src={value.img} />
 							<div className="flex flex-col justify-between">
 								<div>
-									<p>Lorem Ipsum</p>
-									<p>$ 100</p>
+									<p>{value.details}</p>
+									<p>{value.price}</p>
 								</div>
 								<IconsContainer>
 									<i className="fi fi-rr-heart"></i>
 								</IconsContainer>
 							</div>
 						</div>
+
 						<div className="flex gap-[3rem] items-center px-[1rem]">
 							<div className="flex items-center gap-[1rem] [&>i]:hover:cursor-pointer">
 								<i className="fi fi-rr-minus-circle" onClick={handleLess}></i>
 								<p className="select-none text-center w-[40px]">{count}</p>
 								<i className="fi fi-rr-add" onClick={handleAdd}></i>
 							</div>
-							<i className="fi fi-rr-trash"></i>
+							<i
+								className="fi fi-rr-trash hover:cursor-pointer"
+								onClick={() => firebaseApp.delete(key)}
+							></i>
 						</div>
 					</li>
-				</ul>
-			</div>
+				))}
+			</ul>
 		</Container>
 	)
 }
