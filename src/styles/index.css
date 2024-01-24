@@ -1,12 +1,14 @@
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
-
 @import url('https://fonts.googleapis.com/css2?family=Montserrat&family=Nunito+Sans:opsz@6..12&display=swap');
+
+html {
+	scroll-behavior: smooth;
+}
 
 body {
 	font-family: 'Montserrat', sans-serif;
-	scroll-behavior: smooth;
 	color: #2f2f2f;
 }
 

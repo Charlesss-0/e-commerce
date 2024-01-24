@@ -35,12 +35,8 @@ export function Cart() {
 	const [data, setData] = useState([])
 	const { hideCart, setHideCart } = useCart()
 
-	const handleData = (setData, data) => {
-		setData(data)
-	}
-
 	useEffect(() => {
-		firebaseApp.fetch(handleData, setData, 'cart')
+		firebaseApp.fetch(setData, 'cart')
 	}, [firebaseApp.database])
 
 	const handleAdd = () => {
@@ -79,14 +75,14 @@ export function Cart() {
 							<li
 								key={key}
 								className="
-							flex 
-							justify-between 
-							items-center 
-							p-[0.8rem] 
-							rounded-[0.5rem] 
-							bg-[#efefef] 
-							box-shadow
-							"
+									flex 
+									justify-between 
+									items-center 
+									p-[0.8rem] 
+									rounded-[0.5rem] 
+									bg-[#efefef] 
+									box-shadow
+								"
 							>
 								<div
 									className="

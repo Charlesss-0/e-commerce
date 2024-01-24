@@ -23,12 +23,14 @@ export default function Products() {
 				<h1 className="text-[4.5rem] text-[#fff] font-bold text-shadow-sm">
 					Up to <span className="text-[#B80000]">50%</span> discount this season
 				</h1>
-				<button className="Button">
-					<span className="text-shadow-sm">View Products</span>
-				</button>
+				<a href="#content">
+					<button className="Button">
+						<span className="text-shadow-sm">View Products</span>
+					</button>
+				</a>
 			</div>
 
-			<div className="productsContainer">
+			<div className="productsContainer" id="content">
 				<div>
 					<ul className="flex gap-[0.5rem]">
 						{sections.map((section, index) => (
@@ -61,7 +63,10 @@ export default function Products() {
 											className="fi fi-rr-shopping-cart"
 											onClick={() => firebaseApp.add(item, 'cart')}
 										></i>
-										<i className="fi fi-rr-heart"></i>
+										<i
+											className="fi fi-rr-heart"
+											onClick={() => firebaseApp.add(item, 'favorites')}
+										></i>
 									</IconsContainer>
 								</div>
 							</div>

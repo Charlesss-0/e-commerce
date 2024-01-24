@@ -144,6 +144,10 @@ export const IconsContainer = styled.div`
 			outline: none;
 		}
 	}
+
+	&:hover > i:nth-child(2) {
+		color: red;
+	}
 `
 
 export default function Home() {

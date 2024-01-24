@@ -24,7 +24,7 @@ export default class FirebaseApp {
 		push(cartRef, value)
 	}
 
-	fetch(storeData, setUserData, reference) {
+	fetch(setData, reference) {
 		const cartRef = ref(this.database, `${reference}/`)
 		onValue(cartRef, snapshot => {
 			const data = snapshot.val()
@@ -34,9 +34,9 @@ export default class FirebaseApp {
 					key,
 					value,
 				}))
-				storeData(setUserData, values)
+				setData(values)
 			} else {
-				storeData(setUserData, [])
+				setData([])
 			}
 		})
 	}
