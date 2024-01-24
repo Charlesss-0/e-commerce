@@ -4,27 +4,21 @@ import { useEffect, useState } from 'react'
 import FirebaseApp from '../../firebase/firebase'
 import { useCart } from '../context/context'
 
-const Container = styled.div`
+const CartContent = styled.div`
 	background: #fafafa99;
 	width: 80vw;
-	height: 80vh;
+	height: 90vh;
 	border-radius: 1rem;
 	padding: 1rem;
 	backdrop-filter: blur(1rem);
-	position: fixed;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
 	overflow: auto;
-	z-index: 20;
-	scrollbar-width: 0;
 
 	&::-webkit-scrollbar {
 		display: none;
 	}
 `
 
-const Overlay = styled.div`
+export const Overlay = styled.div`
 	position: fixed;
 	top: 0;
 	left: 0;
@@ -38,62 +32,53 @@ const Overlay = styled.div`
 export function Cart() {
 	const firebaseApp = new FirebaseApp()
 	const [count, setCount] = useState(1)
-	const [userData, setUserData] = useState([])
-	const { hide, setHide } = useCart()
+	const [data, setData] = useState([])
+	const { hideCart, setHideCart } = useCart()
 
 	const handleData = (setData, data) => {
 		setData(data)
 	}
 
 	useEffect(() => {
-		firebaseApp.fetch(handleData, setUserData)
+		firebaseApp.fetch(handleData, setData)
 	}, [firebaseApp.database])
 
 	const handleAdd = () => {
 		setCount(count => (count < 100 ? count + 1 : 100))
 	}
 
-	const handleLess = () => {
+	const handleSubtract = () => {
 		setCount(count => (count > 1 ? count - 1 : 1))
 	}
 
 	useEffect(() => {
-		document.body.style.overflow = hide ? 'hidden' : 'auto'
+		document.body.style.overflow = hideCart ? 'hidden' : 'auto'
 
 		return () => {
 			document.body.style.overflow = 'auto'
 		}
-	}, [hide])
+	}, [hideCart])
 
 	return (
-		<Overlay className={hide ? 'block' : 'hidden'}>
-			<Container className={hide ? 'block' : 'hidden'}>
-				<div className="sticky top-0 mb-[1rem]">
-					<div className="flex justify-end">
-						<i
-							onClick={() => setHide(!hide)}
-							className="
-								fi fi-rr-cross-circle 
-								text-[1.5rem] 
-								rounded-full 
-								p-[0.5rem] 
-								bg-[#efefefaa] 
-								box-shadow 
-								hover:bg-[#2f2f2faa] 
-								hover:text-white 
-								hover:cursor-pointer 
-								transition-all 
-								duration-400
-								"
-						></i>
-					</div>
-				</div>
-
-				<ul className="flex flex-col gap-[1rem]">
-					{userData.map(({ key, value }) => (
-						<li
-							key={key}
-							className="
+		<Overlay className={hideCart ? 'block' : 'hidden'}>
+			<div
+				className="	
+					absolute
+					top-[50%]
+					left-[50%]
+					translate-x-[-50%]
+					translate-y-[-50%]
+					flex
+					items-start
+					gap-[1rem]
+					"
+			>
+				<CartContent className={hideCart ? 'block' : 'hidden'}>
+					<ul className="flex flex-col gap-[1rem]">
+						{data.map(({ key, value }) => (
+							<li
+								key={key}
+								className="
 							flex 
 							justify-between 
 							items-center 
@@ -102,35 +87,66 @@ export function Cart() {
 							bg-[#efefef] 
 							box-shadow
 							"
-						>
-							<div className="flex gap-[1rem] text-[0.8rem] [&>img]:w-[100px] [&>img]:rounded-[0.3rem] [&>img]:border-solid [&>img]:border-2 [&>img]:border-[#aaa]">
-								<img src={value.img} />
-								<div className="flex flex-col justify-between">
-									<div>
-										<p>{value.details}</p>
-										<p>{value.price}</p>
+							>
+								<div
+									className="
+									flex 
+									gap-[1rem] 
+									text-[0.8rem] 
+									[&>img]:w-[100px] 
+									[&>img]:rounded-[0.3rem] 
+									[&>img]:border-solid 
+									[&>img]:border-2 
+									[&>img]:border-[#aaa]
+									"
+								>
+									<img src={value.img} />
+									<div className="flex flex-col justify-between">
+										<div>
+											<p>{value.details}</p>
+											<p>{value.price}</p>
+										</div>
+										<IconsContainer>
+											<i className="fi fi-rr-heart"></i>
+										</IconsContainer>
 									</div>
-									<IconsContainer>
-										<i className="fi fi-rr-heart"></i>
-									</IconsContainer>
 								</div>
-							</div>
 
-							<div className="flex gap-[3rem] items-center px-[1rem]">
-								<div className="flex items-center gap-[1rem] [&>i]:hover:cursor-pointer">
-									<i className="fi fi-rr-minus-circle" onClick={handleLess}></i>
-									<p className="select-none text-center w-[40px]">{count}</p>
-									<i className="fi fi-rr-add" onClick={handleAdd}></i>
+								<div className="flex gap-[3rem] items-center px-[1rem]">
+									<div className="flex items-center gap-[1rem] [&>i]:hover:cursor-pointer">
+										<i
+											className="fi fi-rr-minus-circle"
+											onClick={handleSubtract}
+										></i>
+										<p className="select-none text-center w-[40px]">{count}</p>
+										<i className="fi fi-rr-add" onClick={handleAdd}></i>
+									</div>
+									<i
+										className="fi fi-rr-trash hover:cursor-pointer"
+										onClick={() => firebaseApp.delete(key)}
+									></i>
 								</div>
-								<i
-									className="fi fi-rr-trash hover:cursor-pointer"
-									onClick={() => firebaseApp.delete(key)}
-								></i>
-							</div>
-						</li>
-					))}
-				</ul>
-			</Container>
+							</li>
+						))}
+					</ul>
+				</CartContent>
+				<i
+					onClick={() => setHideCart(!hideCart)}
+					className="
+						fi fi-rr-cross-circle 
+						text-[1.5rem] 
+						rounded-full 
+						p-[0.5rem] 
+						bg-[#efefefaa] 
+						box-shadow 
+						hover:bg-[#2f2f2faa] 
+						hover:text-white 
+						hover:cursor-pointer 
+						transition-all 
+						duration-400
+						"
+				></i>
+			</div>
 		</Overlay>
 	)
 }

@@ -90,7 +90,8 @@ export default function HeaderContent() {
 	const location = useLocation()
 	const [isScrolled, setIsScrolled] = useState(0)
 	const [focus, setFocus] = useState(false)
-	const { hide, setHide } = useCart()
+	const { hideCart, setHideCart } = useCart()
+	const { hideFav, setHideFav } = useCart()
 
 	useEffect(() => {
 		const handleScroll = () => {
@@ -130,14 +131,30 @@ export default function HeaderContent() {
 					/>
 				</SearchField>
 
-				<div className="flex items-center gap-[1.5rem] ml-[3rem] [&>i]:text-[1.3rem] [&>i]:hover:cursor-pointer">
-					<Link to={`cart`}>
+				<div
+					className="
+						flex 
+						items-center
+						gap-[2.5rem] 
+						ml-[3rem] 
+						p-[0.5rem]
+						text-[1.3rem]
+						[&>i]:text-[1.3rem] 
+						[&>i]:hover:cursor-pointer
+						"
+				>
+					<Link to="cart">
 						<i
 							className="fi fi-rr-briefcase-blank"
-							onClick={() => setHide(!hide)}
+							onClick={() => setHideCart(!hideCart)}
 						></i>
 					</Link>
-					<i className="fi fi-rr-heart"></i>
+					<Link to="favorites">
+						<i
+							className="fi fi-rr-heart"
+							onClick={() => setHideFav(!hideFav)}
+						></i>
+					</Link>
 					<i className="fi fi-rr-user"></i>
 				</div>
 			</div>

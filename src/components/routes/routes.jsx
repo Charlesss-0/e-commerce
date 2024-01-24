@@ -3,6 +3,7 @@ import App from '../../App'
 import Error from '../../error'
 import Products from '../shop/products'
 import { Cart } from '../orders/cart'
+import { Favorites } from '../orders/favorites'
 
 const routes = [
 	{
@@ -18,6 +19,10 @@ const routes = [
 				path: 'cart/',
 				element: <Cart />,
 			},
+			{
+				path: 'favorites/',
+				element: <Favorites />,
+			},
 		],
 	},
 	{
@@ -27,6 +32,10 @@ const routes = [
 			{
 				path: 'cart/',
 				element: <Cart />,
+			},
+			{
+				path: 'favorites/',
+				element: <Favorites />,
 			},
 		],
 	},

@@ -5,7 +5,7 @@ export default class FirebaseApp {
 	constructor() {
 		this.firebaseApp = this.initialize()
 		this.database = getDatabase(this.firebaseApp)
-		this.dbRef = ref(this.database, 'tasks/')
+		this.cartRef = ref(this.database, 'cart/')
 	}
 
 	initialize() {
@@ -21,11 +21,11 @@ export default class FirebaseApp {
 	}
 
 	add(value) {
-		push(this.dbRef, value)
+		push(this.cartRef, value)
 	}
 
 	fetch(storeData, setUserData) {
-		onValue(this.dbRef, snapshot => {
+		onValue(this.cartRef, snapshot => {
 			const data = snapshot.val()
 
 			if (data) {
@@ -41,7 +41,9 @@ export default class FirebaseApp {
 	}
 
 	delete(key) {
-		const itemRef = ref(this.database, `tasks/${key}`)
+		const itemRef = ref(this.database, `cart/${key}`)
 		remove(itemRef)
 	}
+
+	update(key) {}
 }

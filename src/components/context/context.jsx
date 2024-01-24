@@ -3,13 +3,16 @@ import { createContext, useContext, useState } from 'react'
 const CartContext = createContext('')
 
 export function CartProvider({ children }) {
-	const [hide, setHide] = useState(false)
+	const [hideCart, setHideCart] = useState(false)
+	const [hideFav, setHideFav] = useState(false)
 
 	return (
 		<CartContext.Provider
 			value={{
-				hide,
-				setHide,
+				hideCart,
+				setHideCart,
+				hideFav,
+				setHideFav,
 			}}
 		>
 			{children}

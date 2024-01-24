@@ -14,6 +14,7 @@ export default function Products() {
 		'Workspace',
 		'Bathroom',
 	]
+	const firebaseApp = new FirebaseApp()
 
 	return (
 		<>
@@ -41,45 +42,35 @@ export default function Products() {
 				</div>
 
 				<div className="listContainer">
-					<Items />
+					{products.map(category =>
+						category.items.map((item, index) => (
+							<div key={index} className="mt-[5rem]">
+								<div className="w-[300px] overflow-hidden rounded-[0.5rem] hover:cursor-pointer">
+									<img
+										src={item.img}
+										className="hover:scale-105 transition-all duration-[400ms]"
+									/>
+								</div>
+								<div className="flex justify-between mt-[1rem]">
+									<div className="w-[200px] flex flex-col gap-[0.5rem] text-[0.8rem]">
+										<p>{item.details}</p>
+										<p>$ {item.price}</p>
+									</div>
+									<IconsContainer>
+										<i
+											className="fi fi-rr-shopping-cart"
+											onClick={() => firebaseApp.add(item)}
+										></i>
+										<i className="fi fi-rr-heart"></i>
+									</IconsContainer>
+								</div>
+							</div>
+						))
+					)}
 				</div>
 			</div>
 			<Outlet />
 			<Footer />
-		</>
-	)
-}
-
-function Items() {
-	const firebaseApp = new FirebaseApp()
-
-	return (
-		<>
-			{products.map(category =>
-				category.items.map((item, index) => (
-					<div key={index} className="mt-[5rem]">
-						<div className="w-[300px] overflow-hidden rounded-[0.5rem] hover:cursor-pointer">
-							<img
-								src={item.img}
-								className="hover:scale-105 transition-all duration-[400ms]"
-							/>
-						</div>
-						<div className="flex justify-between mt-[1rem]">
-							<div className="w-[200px] flex flex-col gap-[0.5rem] text-[0.8rem]">
-								<p>{item.details}</p>
-								<p>$ {item.price}</p>
-							</div>
-							<IconsContainer>
-								<i
-									className="fi fi-rr-shopping-cart"
-									onClick={() => firebaseApp.add(item)}
-								></i>
-								<i className="fi fi-rr-heart"></i>
-							</IconsContainer>
-						</div>
-					</div>
-				))
-			)}
 		</>
 	)
 }
