@@ -134,19 +134,25 @@ export const IconsContainer = styled.div`
 	& > i {
 		border-radius: 50%;
 		padding: 0.5rem;
-		outline: 1px solid #4f4f4f;
 		transition: all 400ms;
 
 		&:hover {
 			cursor: pointer;
-			background: #000;
-			color: #fff;
-			outline: none;
+		}
+
+		&:active {
+			transform: scale(0.9);
 		}
 	}
 
-	&:hover > i:nth-child(2) {
+	& > i:nth-child(1):hover {
+		color: #0b60b0;
+		outline: solid 1px #0b60b0;
+	}
+
+	& > i:nth-child(2):hover {
 		color: red;
+		outline: solid 1px red;
 	}
 `
 
