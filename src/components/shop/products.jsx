@@ -59,7 +59,7 @@ export default function Products() {
 									<IconsContainer>
 										<i
 											className="fi fi-rr-shopping-cart"
-											onClick={() => firebaseApp.add(item)}
+											onClick={() => firebaseApp.add(item, 'cart')}
 										></i>
 										<i className="fi fi-rr-heart"></i>
 									</IconsContainer>

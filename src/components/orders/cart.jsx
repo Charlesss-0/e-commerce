@@ -40,7 +40,7 @@ export function Cart() {
 	}
 
 	useEffect(() => {
-		firebaseApp.fetch(handleData, setData)
+		firebaseApp.fetch(handleData, setData, 'cart')
 	}, [firebaseApp.database])
 
 	const handleAdd = () => {
@@ -123,7 +123,7 @@ export function Cart() {
 									</div>
 									<i
 										className="fi fi-rr-trash hover:cursor-pointer"
-										onClick={() => firebaseApp.delete(key)}
+										onClick={() => firebaseApp.delete(key, 'cart')}
 									></i>
 								</div>
 							</li>

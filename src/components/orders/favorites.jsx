@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import { Overlay } from './cart'
 import styled from 'styled-components'
 import { useCart } from '../context/context'
@@ -17,6 +18,14 @@ const FavoritesContent = styled.div`
 
 export function Favorites() {
 	const { hideFav, setHideFav } = useCart()
+
+	useEffect(() => {
+		document.body.style.overflow = hideFav ? 'hidden' : 'auto'
+
+		return () => {
+			document.body.style.overflow = 'auto'
+		}
+	}, [hideFav])
 
 	return (
 		<Overlay className={hideFav ? 'block' : 'hidden'}>

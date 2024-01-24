@@ -5,7 +5,6 @@ export default class FirebaseApp {
 	constructor() {
 		this.firebaseApp = this.initialize()
 		this.database = getDatabase(this.firebaseApp)
-		this.cartRef = ref(this.database, 'cart/')
 	}
 
 	initialize() {
@@ -20,12 +19,14 @@ export default class FirebaseApp {
 		})
 	}
 
-	add(value) {
-		push(this.cartRef, value)
+	add(value, reference) {
+		const cartRef = ref(this.database, `${reference}/`)
+		push(cartRef, value)
 	}
 
-	fetch(storeData, setUserData) {
-		onValue(this.cartRef, snapshot => {
+	fetch(storeData, setUserData, reference) {
+		const cartRef = ref(this.database, `${reference}/`)
+		onValue(cartRef, snapshot => {
 			const data = snapshot.val()
 
 			if (data) {
@@ -40,10 +41,10 @@ export default class FirebaseApp {
 		})
 	}
 
-	delete(key) {
-		const itemRef = ref(this.database, `cart/${key}`)
+	delete(key, reference) {
+		const itemRef = ref(this.database, `${reference}/${key}`)
 		remove(itemRef)
 	}
 
-	update(key) {}
+	update(key, reference) {}
 }
