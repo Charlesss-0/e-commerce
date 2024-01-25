@@ -20,13 +20,13 @@ export default class FirebaseApp {
 	}
 
 	add(value, reference) {
-		const cartRef = ref(this.database, `${reference}/`)
-		push(cartRef, value)
+		const dbRef = ref(this.database, `${reference}/`)
+		push(dbRef, value)
 	}
 
 	fetch(setData, reference) {
-		const cartRef = ref(this.database, `${reference}/`)
-		onValue(cartRef, snapshot => {
+		const dbRef = ref(this.database, `${reference}/`)
+		onValue(dbRef, snapshot => {
 			const data = snapshot.val()
 
 			if (data) {

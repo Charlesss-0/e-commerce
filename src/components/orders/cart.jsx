@@ -11,7 +11,6 @@ const CartContent = styled.div`
 	border-radius: 1rem;
 	padding: 1rem;
 	backdrop-filter: blur(1rem);
-	overflow: auto;
 
 	&::-webkit-scrollbar {
 		display: none;
@@ -70,7 +69,16 @@ export function Cart() {
 					"
 			>
 				<CartContent className={hideCart ? 'block' : 'hidden'}>
-					<ul className="flex flex-col gap-[1rem]">
+					<ul
+						className="
+							flex 
+							flex-col 
+							gap-[1rem] 
+							h-full
+							overflow-auto
+							rounded-[0.5rem]
+							"
+					>
 						{data.map(({ key, value }) => (
 							<li
 								key={key}
