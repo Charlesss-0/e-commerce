@@ -13,7 +13,7 @@ const FavoritesContent = styled.div`
 	padding: 2rem;
 	backdrop-filter: blur(1rem);
 
-	&::-webkit-scrollbar {
+	& > ul::-webkit-scrollbar {
 		display: none;
 	}
 `

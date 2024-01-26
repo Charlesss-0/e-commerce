@@ -12,7 +12,7 @@ const CartContent = styled.div`
 	padding: 1rem;
 	backdrop-filter: blur(1rem);
 
-	&::-webkit-scrollbar {
+	& > ul::-webkit-scrollbar {
 		display: none;
 	}
 `
@@ -56,59 +56,20 @@ export function Cart() {
 
 	return (
 		<Overlay className={hideCart ? 'block' : 'hidden'}>
-			<div
-				className="	
-					absolute
-					top-[50%]
-					left-[50%]
-					translate-x-[-50%]
-					translate-y-[-50%]
-					flex
-					items-start
-					gap-[1rem]
-					"
-			>
+			<div className="absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] flex items-start gap-[1rem]">
 				<CartContent className={hideCart ? 'block' : 'hidden'}>
-					<ul
-						className="
-							flex 
-							flex-col 
-							gap-[1rem] 
-							h-full
-							overflow-auto
-							rounded-[0.5rem]
-							"
-					>
+					<ul className="flex flex-col gap-[1rem] h-full overflow-auto rounded-[0.5rem]">
 						{data.map(({ key, value }) => (
 							<li
 								key={key}
-								className="
-									flex 
-									justify-between 
-									items-center 
-									p-[0.8rem] 
-									rounded-[0.5rem] 
-									bg-[#efefef] 
-									box-shadow
-								"
+								className="flex justify-between items-center p-[0.8rem] rounded-[0.5rem] bg-[#efefef] box-shadow"
 							>
-								<div
-									className="
-									flex 
-									gap-[1rem] 
-									text-[0.8rem] 
-									[&>img]:w-[100px] 
-									[&>img]:rounded-[0.3rem] 
-									[&>img]:border-solid 
-									[&>img]:border-2 
-									[&>img]:border-[#aaa]
-									"
-								>
+								<div className="flex gap-[1rem] text-[0.8rem] [&>img]:w-[100px] [&>img]:rounded-[0.3rem] [&>img]:border-solid [&>img]:border-2 [&>img]:border-[#aaa]">
 									<img src={value.img} />
 									<div className="flex flex-col justify-between">
 										<div>
 											<p>{value.details}</p>
-											<p>{value.price}</p>
+											<p>$ {value.price}</p>
 										</div>
 										<IconsContainer>
 											<i className="fi fi-rr-heart"></i>
@@ -136,19 +97,7 @@ export function Cart() {
 				</CartContent>
 				<i
 					onClick={() => setHideCart(!hideCart)}
-					className="
-						fi fi-rr-cross-circle 
-						text-[1.5rem] 
-						rounded-full 
-						p-[0.5rem] 
-						bg-[#efefefaa] 
-						box-shadow 
-						hover:bg-[#2f2f2faa] 
-						hover:text-white 
-						hover:cursor-pointer 
-						transition-all 
-						duration-400
-						"
+					className="fi fi-rr-cross-circle text-[1.5rem] rounded-full p-[0.5rem] bg-[#efefefaa] box-shadow hover:bg-[#2f2f2faa] hover:text-white hover:cursor-pointer transition-all duration-400"
 				></i>
 			</div>
 		</Overlay>

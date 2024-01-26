@@ -1,4 +1,3 @@
-import './styles/App.css'
 import Header from './components/home/header'
 import Home from './components/home/home'
 import Footer from './components/home/footer'
