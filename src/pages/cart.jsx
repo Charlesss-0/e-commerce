@@ -1,7 +1,7 @@
 import styled from 'styled-components'
-import { IconsContainer } from '../home/home'
+import { IconsContainer } from '../styles/index'
 import { useEffect, useState } from 'react'
-import FirebaseApp from '../../firebase/firebase'
+import FirebaseApp from '../firebase/firebase'
 import { useCart } from '../context/context'
 
 const CartContent = styled.div`

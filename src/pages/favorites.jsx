@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react'
-import FirebaseApp from '../../firebase/firebase'
+import FirebaseApp from '../firebase/firebase'
 import { useCart } from '../context/context'
 import styled from 'styled-components'
 import { Overlay } from './cart'
-import { IconsContainer } from '../home/home'
+import { IconsContainer } from '../styles/index'
 
 const FavoritesContent = styled.div`
 	width: 80vw;

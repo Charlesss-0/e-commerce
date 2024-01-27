@@ -1,11 +1,12 @@
-import HeaderContent from '../home/header'
-import Footer from '../home/footer'
-import { products } from '../data/data'
-import { IconsContainer } from '../home/home'
-import { Outlet } from 'react-router-dom'
 import FirebaseApp from '../../firebase/firebase'
+import { Outlet } from 'react-router-dom'
 import { useState } from 'react'
 import styled, { keyframes } from 'styled-components'
+
+import HeaderContent from '../home/header'
+import Footer from '../home/footer'
+import { IconsContainer } from '../../styles/index'
+import { products } from '../../data/data'
 
 const Hero = styled.div`
 	background: url(https://images.unsplash.com/photo-1524758631624-e2822e304c36?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D);
@@ -166,7 +167,7 @@ export default function Products() {
 		'Bathroom',
 	]
 	const firebaseApp = new FirebaseApp()
-	const [flexGrid, setFlexGrid] = useState(false)
+	const [listGrid, setListGrid] = useState(false)
 
 	return (
 		<>
@@ -191,9 +192,9 @@ export default function Products() {
 					</ul>
 					<div className="flex items-center gap-[1.5rem] text-[1.3rem] text-[#5f5f5f] [&>i]:hover:cursor-pointer [&>i]:p-[1rem] [&>i]:rounded-full [&>i]:transition-all [&>i]:duration-400">
 						<i
-							onClick={() => setFlexGrid(!flexGrid)}
+							onClick={() => setListGrid(!listGrid)}
 							className={`fi ${
-								flexGrid
+								listGrid
 									? 'fi-rr-rectangle-vertical-history rotate-[90deg]'
 									: 'fi-rr-apps'
 							} hover:bg-[#f3f3f3]`}
@@ -202,21 +203,21 @@ export default function Products() {
 					</div>
 				</div>
 
-				<ListContainer className={flexGrid ? 'flex flex-col' : 'block'}>
+				<ListContainer className={listGrid ? 'flex flex-col' : 'block'}>
 					{products.map(category =>
 						category.items.map((item, index) => (
-							<Item key={index} $list={flexGrid}>
+							<Item key={index} $list={listGrid}>
 								<div className="overflow-hidden rounded-[0.5rem] hover:cursor-pointer">
 									<img src={item.img} />
 								</div>
 								<div
 									className={`flex justify-between mt-[1rem] ${
-										flexGrid ? 'flex flex-col mt-0' : ''
+										listGrid ? 'flex flex-col mt-0' : ''
 									}`}
 								>
 									<div
 										className={`w-[200px] flex flex-col gap-[0.5rem] text-[0.8rem] ${
-											flexGrid ? 'flex items-start justify-end' : ''
+											listGrid ? 'flex items-start justify-end' : ''
 										}`}
 									>
 										<p>{item.details}</p>

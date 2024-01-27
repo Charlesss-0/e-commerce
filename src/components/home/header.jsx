@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import { Link, useLocation } from 'react-router-dom'
-import { useCart } from '../context/context'
+import { useCart } from '../../context/context'
 
 const Header = styled.header`
 	background: none;
@@ -131,18 +131,7 @@ export default function HeaderContent() {
 					/>
 				</SearchField>
 
-				<div
-					className="
-						flex 
-						items-center
-						gap-[2.5rem] 
-						ml-[3rem] 
-						p-[0.5rem]
-						text-[1.3rem]
-						[&>i]:text-[1.3rem] 
-						[&>i]:hover:cursor-pointer
-						"
-				>
+				<div className="flex items-center gap-[2.5rem] ml-[3rem] p-[0.5rem] text-[1.3rem] [&>i]:text-[1.3rem] [&>i]:hover:cursor-pointer">
 					<Link to="cart">
 						<i
 							className="fi fi-rr-briefcase-blank"

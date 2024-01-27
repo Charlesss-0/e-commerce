@@ -1,6 +1,7 @@
 import styled from 'styled-components'
-import { items } from '../data/data'
+import { items } from '../../data/data'
 import { Outlet } from 'react-router-dom'
+import { IconsContainer } from '../../styles'
 
 const Hero = styled.div`
 	background: url('https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?q=80&w=1932&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
@@ -126,36 +127,6 @@ const Button = styled.button`
 	border-radius: 0.5rem;
 `
 
-export const IconsContainer = styled.div`
-	display: flex;
-	align-items: center;
-	gap: 0.5rem;
-
-	& > i {
-		border-radius: 50%;
-		padding: 0.5rem;
-		transition: all 400ms;
-
-		&:hover {
-			cursor: pointer;
-		}
-
-		&:active {
-			transform: scale(0.9);
-		}
-	}
-
-	& > i:nth-child(1):hover {
-		color: #0b60b0;
-		outline: solid 1px #0b60b0;
-	}
-
-	& > i:nth-child(2):hover {
-		color: red;
-		outline: solid 1px red;
-	}
-`
-
 export default function Home() {
 	return (
 		<>
@@ -183,13 +154,7 @@ export default function Home() {
 							<div className="h-[500px] overflow-hidden rounded-[0.5rem] box-shadow">
 								<img
 									src={item.img}
-									className="
-										w-[400px] 
-										hover:scale-105 
-										transition-all 
-										duration-300 
-										hover:cursor-pointer
-										"
+									className="w-[400px] hover:scale-105 transition-all duration-300 hover:cursor-pointer"
 								/>
 							</div>
 							<div className="flex justify-between mt-[2rem]">
@@ -212,16 +177,7 @@ export default function Home() {
 					src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?q=80&w=1916&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
 					className="w-full"
 				/>
-				<div
-					className="
-						absolute 
-						top-[50%] 
-						left-[50%] 
-						translate-x-[-50%] 
-						translate-y-[-50%] 
-						text-white
-						"
-				>
+				<div className="absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] text-white">
 					<h1 className="text-[2rem] font-bold">
 						Brown wooden framed yellow padded chair
 					</h1>
@@ -258,39 +214,14 @@ export default function Home() {
 						</li>
 					))}
 				</ul>
-				<button
-					className="
-						border-solid 
-						border 
-						border-black 
-						px-[1rem] 
-						py-[0.5rem] 
-						w-[max-content] 
-						self-center 
-						hover:bg-black 
-						hover:text-white 
-						transition-all 
-						duration-500
-						"
-				>
+				<button className="border-solid border border-black px-[1rem] py-[0.5rem] w-[max-content] self-center hover:bg-black hover:text-white transition-all duration-500">
 					Load more
 				</button>
 			</Products>
 
 			<HighlightContainer>
 				<img src="https://images.unsplash.com/photo-1594026112284-02bb6f3352fe?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" />
-				<div
-					className="
-						absolute 
-						top-[50%] 
-						left-[50%] 
-						translate-x-[-50%] 
-						translate-y-[-50%] 
-						flex 
-						flex-col 
-						items-center
-						"
-				>
+				<div className="absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] flex flex-col items-center">
 					<h1 className=" text-white text-[3rem] font-bold text-shadow-sm mb-[2rem]">
 						Up to <span className="text-[#B80000]">50%</span> discount this
 						season

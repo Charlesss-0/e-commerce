@@ -1,9 +1,9 @@
 import { createBrowserRouter } from 'react-router-dom'
-import App from '../../App'
-import Error from '../../error'
-import Products from '../shop/products'
-import { Cart } from '../orders/cart'
-import { Favorites } from '../orders/favorites'
+import App from '../App'
+import Error from '../error'
+import Products from '../components/shop/products'
+import { Cart } from '../pages/cart'
+import { Favorites } from '../pages/favorites'
 
 const routes = [
 	{
