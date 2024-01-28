@@ -1,8 +1,8 @@
 import styled from 'styled-components'
-import { IconsContainer } from '../styles/index'
+import { IconsContainer } from '../components/styled-components'
 import { useEffect, useState } from 'react'
 import FirebaseApp from '../firebase/firebase'
-import { useCart } from '../context/context'
+import { useAppContext } from '../context/context'
 
 const CartContent = styled.div`
 	background: #fafafa99;
@@ -32,7 +32,7 @@ export function Cart() {
 	const firebaseApp = new FirebaseApp()
 	const [count, setCount] = useState(1)
 	const [data, setData] = useState([])
-	const { hideCart, setHideCart } = useCart()
+	const { hideCart, setHideCart } = useAppContext()
 
 	useEffect(() => {
 		firebaseApp.fetch(setData, 'cart')

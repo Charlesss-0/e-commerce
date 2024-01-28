@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import { Link, useLocation } from 'react-router-dom'
-import { useCart } from '../context/context'
+import { useAppContext } from '../context/context'
 
 const Header = styled.header`
 	background: none;
@@ -88,10 +88,10 @@ export default function HeaderContent() {
 	const menuItems = ['Home', 'Products', 'About']
 
 	const location = useLocation()
-	const [isScrolled, setIsScrolled] = useState(0)
+	const { isScrolled, setIsScrolled } = useAppContext()
 	const [focus, setFocus] = useState(false)
-	const { hideCart, setHideCart } = useCart()
-	const { hideFav, setHideFav } = useCart()
+	const { hideCart, setHideCart } = useAppContext()
+	const { hideFav, setHideFav } = useAppContext()
 
 	useEffect(() => {
 		const handleScroll = () => {

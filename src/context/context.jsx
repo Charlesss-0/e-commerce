@@ -5,6 +5,7 @@ const CartContext = createContext('')
 export function CartProvider({ children }) {
 	const [hideCart, setHideCart] = useState(false)
 	const [hideFav, setHideFav] = useState(false)
+	const [isScrolled, setIsScrolled] = useState(0)
 
 	return (
 		<CartContext.Provider
@@ -13,6 +14,8 @@ export function CartProvider({ children }) {
 				setHideCart,
 				hideFav,
 				setHideFav,
+				isScrolled,
+				setIsScrolled,
 			}}
 		>
 			{children}
@@ -20,6 +23,6 @@ export function CartProvider({ children }) {
 	)
 }
 
-export function useCart() {
+export function useAppContext() {
 	return useContext(CartContext)
 }

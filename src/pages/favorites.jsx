@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react'
 import FirebaseApp from '../firebase/firebase'
-import { useCart } from '../context/context'
+import { useAppContext } from '../context/context'
 import styled from 'styled-components'
 import { Overlay } from './cart'
-import { IconsContainer } from '../styles/index'
+import { IconsContainer } from '../components/styled-components'
 
 const FavoritesContent = styled.div`
 	width: 80vw;
@@ -21,7 +21,7 @@ const FavoritesContent = styled.div`
 export function Favorites() {
 	const firebaseApp = new FirebaseApp()
 	const [data, setData] = useState([])
-	const { hideFav, setHideFav } = useCart()
+	const { hideFav, setHideFav } = useAppContext()
 
 	useEffect(() => {
 		firebaseApp.fetch(setData, 'favorites')

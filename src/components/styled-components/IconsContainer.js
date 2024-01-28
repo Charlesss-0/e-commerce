@@ -19,13 +19,21 @@ export const IconsContainer = styled.div`
 		}
 	}
 
-	& > i:nth-child(1):hover {
-		color: #0b60b0;
-		outline: solid 1px #0b60b0;
-	}
+	${props =>
+		props.$condition
+			? `
+		& > i:nth-child(1):hover {
+			color: #0b60b0;
+			outline: solid 1px #0b60b0;
+		}
 
-	& > i:nth-child(2):hover {
-		color: red;
-		outline: solid 1px red;
-	}
+		& > i:nth-child(2):hover {
+			color: red;
+			outline: solid 1px red;
+		}
+	`
+			: `& > i:hover {
+				color: red;
+				outline: solid 1px red;
+			}`}
 `

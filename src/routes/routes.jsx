@@ -1,6 +1,6 @@
 import { createBrowserRouter } from 'react-router-dom'
 import App from '../App'
-import Error from '../error'
+import ErrorPage from '../pages/error/errorPage'
 import Products from '../pages/shop/products'
 import { Cart } from '../pages/cart'
 import { Favorites } from '../pages/favorites'
@@ -9,7 +9,7 @@ const routes = [
 	{
 		path: '/',
 		element: <App />,
-		errorElement: <Error />,
+		errorElement: <ErrorPage />,
 		children: [
 			{
 				path: 'cart/',

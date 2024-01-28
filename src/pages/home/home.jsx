@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import { items } from '../../data/data'
 import { Outlet } from 'react-router-dom'
-import { IconsContainer } from '../../styles/index'
+import { IconsContainer } from '../../components/styled-components'
 
 const Hero = styled.div`
 	background: url('https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?q=80&w=1932&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
@@ -162,7 +162,7 @@ export default function Home() {
 									<p>{item.details}</p>
 									<p>${item.price}</p>
 								</div>
-								<IconsContainer>
+								<IconsContainer $condition="true">
 									<i className="fi fi-rr-shopping-cart"></i>
 									<i className="fi fi-rr-heart"></i>
 								</IconsContainer>
@@ -206,7 +206,7 @@ export default function Home() {
 									<p>{item.details}</p>
 									<p>${item.price}</p>
 								</div>
-								<IconsContainer>
+								<IconsContainer $condition="true">
 									<i className="fi fi-rr-shopping-cart"></i>
 									<i className="fi fi-rr-heart"></i>
 								</IconsContainer>

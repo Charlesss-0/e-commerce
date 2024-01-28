@@ -5,7 +5,7 @@ import styled, { keyframes } from 'styled-components'
 
 import HeaderContent from '../../components/header'
 import Footer from '../../components/footer'
-import { IconsContainer } from '../../styles/index'
+import { IconsContainer } from '../../components/styled-components'
 import { products } from '../../data/data'
 
 const Hero = styled.div`
@@ -223,7 +223,7 @@ export default function Products() {
 										<p>{item.details}</p>
 										<p>$ {item.price}</p>
 									</div>
-									<IconsContainer>
+									<IconsContainer $condition="true">
 										<i
 											className="fi fi-rr-shopping-cart"
 											onClick={() => firebaseApp.add(item, 'cart')}
