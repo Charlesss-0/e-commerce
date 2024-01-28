@@ -37,40 +37,13 @@ export function Favorites() {
 
 	return (
 		<Overlay className={hideFav ? 'block' : 'hidden'}>
-			<div
-				className="
-                    absolute
-                    top-[50%]
-                    left-[50%]
-                    translate-x-[-50%]
-                    translate-y-[-50%]
-                    flex
-                    gap-[1rem]
-                    items-start
-                    "
-			>
+			<div className="absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] flex gap-[1rem] items-start">
 				<FavoritesContent className={hideFav ? 'block' : 'hidden'}>
-					<ul
-						className="
-						flex
-						flex-wrap
-						justify-around
-						gap-[2rem]
-						h-full
-						overflow-auto
-						"
-					>
+					<ul className="flex flex-wrap justify-around gap-[2rem] h-full overflow-auto">
 						{data.map(({ key, value }) => (
 							<li
 								key={key}
-								className="
-									flex
-									flex-col
-									gap-[1rem]
-									mb-[2rem]
-									[&>img]:w-[250px]
-									[&>img]:rounded-[0.5rem]
-									"
+								className="flex flex-col gap-[1rem] mb-[2rem] [&>img]:w-[250px] [&>img]:rounded-[0.5rem]"
 							>
 								<img src={value.img} alt={value.details} />
 								<div className="flex justify-between">
@@ -91,19 +64,7 @@ export function Favorites() {
 				</FavoritesContent>
 				<i
 					onClick={() => setHideFav(!hideFav)}
-					className="
-                        fi fi-rr-cross-circle 
-                        text-[1.5rem] 
-                        rounded-full 
-                        p-[0.5rem] 
-                        bg-[#efefefaa] 
-                        box-shadow 
-                        hover:bg-[#2f2f2faa] 
-                        hover:text-white 
-                        hover:cursor-pointer 
-                        transition-all 
-                        duration-400
-                        "
+					className="fi fi-rr-cross-circle text-[1.5rem] rounded-full p-[0.5rem] bg-[#efefefaa] box-shadow hover:bg-[#2f2f2faa] hover:text-white hover:cursor-pointer transition-all duration-400"
 				></i>
 			</div>
 		</Overlay>

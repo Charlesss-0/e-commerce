@@ -1,6 +1,6 @@
-import Header from './components/home/header'
-import Home from './components/home/home'
-import Footer from './components/home/footer'
+import Header from './components/header'
+import Footer from './components/footer'
+import Home from './pages/home/home'
 
 export default function App() {
 	return (

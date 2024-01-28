@@ -3,8 +3,8 @@ import { Outlet } from 'react-router-dom'
 import { useState } from 'react'
 import styled, { keyframes } from 'styled-components'
 
-import HeaderContent from '../home/header'
-import Footer from '../home/footer'
+import HeaderContent from '../../components/header'
+import Footer from '../../components/footer'
 import { IconsContainer } from '../../styles/index'
 import { products } from '../../data/data'
 
@@ -154,7 +154,7 @@ const Item = styled.li`
 		& > div > img {
 			width: 200px;
 		}
-	`}
+		`}
 `
 
 export default function Products() {

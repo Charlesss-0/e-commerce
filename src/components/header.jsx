@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import { Link, useLocation } from 'react-router-dom'
-import { useCart } from '../../context/context'
+import { useCart } from '../context/context'
 
 const Header = styled.header`
 	background: none;
@@ -150,7 +150,12 @@ export default function HeaderContent() {
 
 			<ul className="flex gap-[1.5rem] mt-[2rem]">
 				{menuItems.map((item, index) => (
-					<Link to={`/${item.toLowerCase()}`} key={index}>
+					<Link
+						to={`${
+							item.toLowerCase() === 'home' ? '/' : `/${item.toLowerCase()}`
+						}`}
+						key={index}
+					>
 						<Item
 							$selected={
 								location.pathname.includes(`/${item.toLowerCase()}`) ||
