@@ -1,7 +1,10 @@
 import styled from 'styled-components'
 import { items } from '../../data/data'
 import { Outlet } from 'react-router-dom'
-import { IconsContainer } from '../../components/styled-components'
+import {
+	IconsContainer,
+	HightlightButton,
+} from '../../components/styled-components'
 
 const Hero = styled.div`
 	background: url('https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?q=80&w=1932&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
@@ -118,15 +121,6 @@ const Products = styled.div`
 	padding: 1rem;
 `
 
-const Button = styled.button`
-	padding: 0.5rem 1rem;
-	font-size: 1rem;
-	background: #1f1717;
-	color: #fff;
-	border: none;
-	border-radius: 0.5rem;
-`
-
 export default function Home() {
 	return (
 		<>
@@ -184,7 +178,7 @@ export default function Home() {
 					<p className="text-[1.3rem] mb-[2rem]">
 						Long lasting and comfortable to use. This is for you.
 					</p>
-					<Button>Shop Now</Button>
+					<HightlightButton>Shop Now</HightlightButton>
 				</div>
 			</HighlightContainer>
 
@@ -226,7 +220,7 @@ export default function Home() {
 						Up to <span className="text-[#B80000]">50%</span> discount this
 						season
 					</h1>
-					<Button>Shop Now</Button>
+					<HightlightButton>Shop Now</HightlightButton>
 				</div>
 			</HighlightContainer>
 
