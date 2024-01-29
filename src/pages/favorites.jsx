@@ -60,7 +60,7 @@ export function Favorites() {
 									{data.map(({ key, value }) => (
 										<li
 											key={key}
-											className="flex flex-col gap-[1rem] mb-[2rem] [&>img]:w-[250px] [&>img]:rounded-[0.5rem]"
+											className="flex flex-col gap-[1rem] h-[max-content] mb-[2rem] rounded-[0.5rem] p-[0.8rem] bg-[#efefefaa] box-shadow [&>img]:w-[250px]  [&>img]:rounded-[0.5rem] [&>img]:shadow-md"
 										>
 											<img src={value.img} alt={value.details} />
 											<div className="flex justify-between">
