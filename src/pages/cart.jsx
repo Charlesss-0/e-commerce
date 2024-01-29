@@ -1,23 +1,10 @@
 import styled from 'styled-components'
-import { IconsContainer } from '../components/styled-components'
+import { IconsContainer, PopUpContainer } from '../components/styled-components'
 import { useEffect, useState } from 'react'
 import FirebaseApp from '../firebase/firebase'
 import { useAppContext } from '../context/context'
 import { fetchData } from '../utils/fetchData'
-import { EmptyMessage, Loading } from '../components'
-
-const CartContent = styled.div`
-	background: #fafafa99;
-	width: 80vw;
-	height: 90vh;
-	border-radius: 1rem;
-	padding: 1rem;
-	backdrop-filter: blur(1rem);
-
-	& > ul::-webkit-scrollbar {
-		display: none;
-	}
-`
+import { EmptyMessage, Loading, SubHeading } from '../components'
 
 export const Overlay = styled.div`
 	position: fixed;
@@ -68,12 +55,19 @@ export function Cart() {
 
 	return (
 		<Overlay className={hideCart ? 'block' : 'hidden'}>
-			<div className="absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] flex items-start gap-[1rem]">
-				<CartContent className={hideCart ? 'block' : 'hidden'}>
+			<div
+				className={
+					hideCart
+						? 'absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] flex items-start gap-[1rem]'
+						: 'hidden'
+				}
+			>
+				<PopUpContainer>
+					<SubHeading>Cart</SubHeading>
 					{isLoading ? (
 						<Loading />
 					) : (
-						<ul className="flex flex-col gap-[1rem] h-full overflow-auto rounded-[0.5rem]">
+						<ul className="flex flex-col gap-[1rem] h-full pb-[3rem] overflow-auto rounded-[0.5rem]">
 							{isEmpty ? (
 								<>
 									{data.map(({ key, value }) => (
@@ -118,7 +112,7 @@ export function Cart() {
 							)}
 						</ul>
 					)}
-				</CartContent>
+				</PopUpContainer>
 				<i
 					onClick={() => setHideCart(!hideCart)}
 					className="fi fi-rr-cross-circle text-[1.5rem] rounded-full p-[0.5rem] bg-[#efefefaa] box-shadow hover:bg-[#2f2f2faa] hover:text-white hover:cursor-pointer transition-all duration-400"

@@ -1,24 +1,10 @@
 import { useEffect, useState } from 'react'
 import FirebaseApp from '../firebase/firebase'
 import { useAppContext } from '../context/context'
-import styled from 'styled-components'
 import { Overlay } from './cart'
-import { IconsContainer } from '../components/styled-components'
+import { IconsContainer, PopUpContainer } from '../components/styled-components'
 import { EmptyMessage, Loading } from '../components'
 import { fetchData } from '../utils/fetchData'
-
-const FavoritesContent = styled.div`
-	width: 80vw;
-	height: 90vh;
-	background: #fafafa99;
-	border-radius: 1rem;
-	padding: 2rem;
-	backdrop-filter: blur(1rem);
-
-	& > ul::-webkit-scrollbar {
-		display: none;
-	}
-`
 
 export function Favorites() {
 	const firebaseApp = new FirebaseApp()
@@ -49,12 +35,19 @@ export function Favorites() {
 
 	return (
 		<Overlay className={hideFav ? 'block' : 'hidden'}>
-			<div className="absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] flex gap-[1rem] items-start">
-				<FavoritesContent className={hideFav ? 'block' : 'hidden'}>
+			<div
+				className={
+					hideFav
+						? 'absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] flex gap-[1rem] items-start'
+						: 'hidden'
+				}
+			>
+				<PopUpContainer $activeClass>
+					<h1 className="text-center text-[1.3rem] mb-[2rem]">Favorites</h1>
 					{isLoading ? (
 						<Loading />
 					) : (
-						<ul className="flex flex-wrap justify-around gap-[2rem] h-full overflow-auto">
+						<ul className="flex flex-wrap justify-around gap-[2rem] h-full pb-[3rem] overflow-auto">
 							{isEmpty ? (
 								<>
 									{data.map(({ key, value }) => (
@@ -83,7 +76,7 @@ export function Favorites() {
 							)}
 						</ul>
 					)}
-				</FavoritesContent>
+				</PopUpContainer>
 				<i
 					onClick={() => setHideFav(!hideFav)}
 					className="fi fi-rr-cross-circle text-[1.5rem] rounded-full p-[0.5rem] bg-[#efefefaa] box-shadow hover:bg-[#2f2f2faa] hover:text-white hover:cursor-pointer transition-all duration-400"
