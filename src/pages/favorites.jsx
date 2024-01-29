@@ -22,10 +22,19 @@ export function Favorites() {
 	const firebaseApp = new FirebaseApp()
 	const [data, setData] = useState([])
 	const { hideFav, setHideFav } = useAppContext()
+	const [isEmpty, setIsEmpty] = useState(false)
 
 	useEffect(() => {
 		firebaseApp.fetch(setData, 'favorites')
 	}, [])
+
+	useEffect(() => {
+		if (data.length == 0) {
+			setIsEmpty(false)
+		} else {
+			setIsEmpty(true)
+		}
+	}, [data])
 
 	useEffect(() => {
 		document.body.style.overflow = hideFav ? 'hidden' : 'auto'
@@ -40,26 +49,34 @@ export function Favorites() {
 			<div className="absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] flex gap-[1rem] items-start">
 				<FavoritesContent className={hideFav ? 'block' : 'hidden'}>
 					<ul className="flex flex-wrap justify-around gap-[2rem] h-full overflow-auto">
-						{data.map(({ key, value }) => (
-							<li
-								key={key}
-								className="flex flex-col gap-[1rem] mb-[2rem] [&>img]:w-[250px] [&>img]:rounded-[0.5rem]"
-							>
-								<img src={value.img} alt={value.details} />
-								<div className="flex justify-between">
-									<div>
-										<p>{value.details}</p>
-										<p>$ {value.price}</p>
-									</div>
-									<IconsContainer>
-										<i
-											onClick={() => firebaseApp.delete(key, 'favorites')}
-											className="fi fi-rr-heart"
-										></i>
-									</IconsContainer>
-								</div>
-							</li>
-						))}
+						{isEmpty ? (
+							<>
+								{data.map(({ key, value }) => (
+									<li
+										key={key}
+										className="flex flex-col gap-[1rem] mb-[2rem] [&>img]:w-[250px] [&>img]:rounded-[0.5rem]"
+									>
+										<img src={value.img} alt={value.details} />
+										<div className="flex justify-between">
+											<div>
+												<p>{value.details}</p>
+												<p>$ {value.price}</p>
+											</div>
+											<IconsContainer>
+												<i
+													onClick={() => firebaseApp.delete(key, 'favorites')}
+													className="fi fi-rr-heart"
+												></i>
+											</IconsContainer>
+										</div>
+									</li>
+								))}
+							</>
+						) : (
+							<h1 className="absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]">
+								Nothing here!
+							</h1>
+						)}
 					</ul>
 				</FavoritesContent>
 				<i
