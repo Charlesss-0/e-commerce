@@ -4,6 +4,8 @@ import { useAppContext } from '../context/context'
 import styled from 'styled-components'
 import { Overlay } from './cart'
 import { IconsContainer } from '../components/styled-components'
+import { EmptyMessage, Loading } from '../components'
+import { fetchData } from '../utils/fetchData'
 
 const FavoritesContent = styled.div`
 	width: 80vw;
@@ -23,10 +25,11 @@ export function Favorites() {
 	const [data, setData] = useState([])
 	const { hideFav, setHideFav } = useAppContext()
 	const [isEmpty, setIsEmpty] = useState(false)
+	const [isLoading, setIsLoading] = useState(false)
 
 	useEffect(() => {
-		firebaseApp.fetch(setData, 'favorites')
-	}, [])
+		fetchData(setIsLoading, setData, 'favorites')
+	}, [firebaseApp.database])
 
 	useEffect(() => {
 		if (data.length == 0) {
@@ -48,36 +51,38 @@ export function Favorites() {
 		<Overlay className={hideFav ? 'block' : 'hidden'}>
 			<div className="absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] flex gap-[1rem] items-start">
 				<FavoritesContent className={hideFav ? 'block' : 'hidden'}>
-					<ul className="flex flex-wrap justify-around gap-[2rem] h-full overflow-auto">
-						{isEmpty ? (
-							<>
-								{data.map(({ key, value }) => (
-									<li
-										key={key}
-										className="flex flex-col gap-[1rem] mb-[2rem] [&>img]:w-[250px] [&>img]:rounded-[0.5rem]"
-									>
-										<img src={value.img} alt={value.details} />
-										<div className="flex justify-between">
-											<div>
-												<p>{value.details}</p>
-												<p>$ {value.price}</p>
+					{isLoading ? (
+						<Loading />
+					) : (
+						<ul className="flex flex-wrap justify-around gap-[2rem] h-full overflow-auto">
+							{isEmpty ? (
+								<>
+									{data.map(({ key, value }) => (
+										<li
+											key={key}
+											className="flex flex-col gap-[1rem] mb-[2rem] [&>img]:w-[250px] [&>img]:rounded-[0.5rem]"
+										>
+											<img src={value.img} alt={value.details} />
+											<div className="flex justify-between">
+												<div>
+													<p>{value.details}</p>
+													<p>$ {value.price}</p>
+												</div>
+												<IconsContainer>
+													<i
+														onClick={() => firebaseApp.delete(key, 'favorites')}
+														className="fi fi-rr-heart"
+													></i>
+												</IconsContainer>
 											</div>
-											<IconsContainer>
-												<i
-													onClick={() => firebaseApp.delete(key, 'favorites')}
-													className="fi fi-rr-heart"
-												></i>
-											</IconsContainer>
-										</div>
-									</li>
-								))}
-							</>
-						) : (
-							<h1 className="absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]">
-								Nothing here!
-							</h1>
-						)}
-					</ul>
+										</li>
+									))}
+								</>
+							) : (
+								<EmptyMessage>Favorites is empty!</EmptyMessage>
+							)}
+						</ul>
+					)}
 				</FavoritesContent>
 				<i
 					onClick={() => setHideFav(!hideFav)}

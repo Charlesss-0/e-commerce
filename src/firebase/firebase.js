@@ -25,19 +25,29 @@ export default class FirebaseApp {
 	}
 
 	fetch(setData, reference) {
-		const dbRef = ref(this.database, `${reference}/`)
-		onValue(dbRef, snapshot => {
-			const data = snapshot.val()
+		return new Promise((resolve, reject) => {
+			const dbRef = ref(this.database, `${reference}`)
+			onValue(
+				dbRef,
+				snapshot => {
+					const data = snapshot.val()
 
-			if (data) {
-				const values = Object.entries(data).map(([key, value]) => ({
-					key,
-					value,
-				}))
-				setData(values)
-			} else {
-				setData([])
-			}
+					if (data) {
+						const result = Object.entries(data).map(([key, value]) => ({
+							key,
+							value,
+						}))
+						setData(result)
+						resolve(result)
+					} else {
+						setData([])
+						resolve([])
+					}
+				},
+				error => {
+					reject(error)
+				}
+			)
 		})
 	}
 
