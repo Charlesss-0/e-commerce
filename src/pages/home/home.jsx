@@ -156,7 +156,7 @@ export default function Home() {
 									<p>{item.details}</p>
 									<p>${item.price}</p>
 								</div>
-								<IconsContainer $condition="true">
+								<IconsContainer $condition>
 									<i className="fi fi-rr-shopping-cart"></i>
 									<i className="fi fi-rr-heart"></i>
 								</IconsContainer>
@@ -200,7 +200,7 @@ export default function Home() {
 									<p>{item.details}</p>
 									<p>${item.price}</p>
 								</div>
-								<IconsContainer $condition="true">
+								<IconsContainer $condition>
 									<i className="fi fi-rr-shopping-cart"></i>
 									<i className="fi fi-rr-heart"></i>
 								</IconsContainer>

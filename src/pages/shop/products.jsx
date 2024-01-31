@@ -7,6 +7,7 @@ import HeaderContent from '../../components/header'
 import Footer from '../../components/footer'
 import { IconsContainer } from '../../components/styled-components'
 import { products } from '../../data/data'
+import { useAppContext } from '../../context/context'
 
 const Hero = styled.div`
 	background: url(https://images.unsplash.com/photo-1524758631624-e2822e304c36?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D);
@@ -168,6 +169,7 @@ export default function Products() {
 	]
 	const firebaseApp = new FirebaseApp()
 	const [listGrid, setListGrid] = useState(false)
+	const { setCartCount } = useAppContext()
 
 	return (
 		<>
@@ -223,10 +225,13 @@ export default function Products() {
 										<p>{item.details}</p>
 										<p>$ {item.price}</p>
 									</div>
-									<IconsContainer $condition="true">
+									<IconsContainer $condition>
 										<i
 											className="fi fi-rr-shopping-cart"
-											onClick={() => firebaseApp.add(item, 'cart')}
+											onClick={() => {
+												firebaseApp.add(item, 'cart')
+												setCartCount(prev => prev + 1)
+											}}
 										></i>
 										<i
 											className="fi fi-rr-heart"

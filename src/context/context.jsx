@@ -1,14 +1,15 @@
 import { createContext, useContext, useState } from 'react'
 
-const CartContext = createContext('')
+const PageContext = createContext('')
 
 export function CartProvider({ children }) {
 	const [hideCart, setHideCart] = useState(false)
 	const [hideFav, setHideFav] = useState(false)
 	const [isScrolled, setIsScrolled] = useState(0)
+	const [cartCount, setCartCount] = useState(0)
 
 	return (
-		<CartContext.Provider
+		<PageContext.Provider
 			value={{
 				hideCart,
 				setHideCart,
@@ -16,13 +17,15 @@ export function CartProvider({ children }) {
 				setHideFav,
 				isScrolled,
 				setIsScrolled,
+				cartCount,
+				setCartCount,
 			}}
 		>
 			{children}
-		</CartContext.Provider>
+		</PageContext.Provider>
 	)
 }
 
 export function useAppContext() {
-	return useContext(CartContext)
+	return useContext(PageContext)
 }

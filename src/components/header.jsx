@@ -88,10 +88,16 @@ export default function HeaderContent() {
 	const menuItems = ['Home', 'Products', 'About']
 
 	const location = useLocation()
-	const { isScrolled, setIsScrolled } = useAppContext()
+	const {
+		isScrolled,
+		setIsScrolled,
+		hideCart,
+		setHideCart,
+		hideFav,
+		setHideFav,
+		cartCount,
+	} = useAppContext()
 	const [focus, setFocus] = useState(false)
-	const { hideCart, setHideCart } = useAppContext()
-	const { hideFav, setHideFav } = useAppContext()
 
 	useEffect(() => {
 		const handleScroll = () => {
@@ -134,9 +140,13 @@ export default function HeaderContent() {
 				<div className="flex items-center gap-[2.5rem] ml-[3rem] p-[0.5rem] text-[1.3rem] [&>i]:text-[1.3rem] [&>i]:hover:cursor-pointer">
 					<Link to="cart">
 						<i
-							className="fi fi-rr-briefcase-blank"
+							className="fi fi-rr-briefcase-blank relative"
 							onClick={() => setHideCart(!hideCart)}
-						></i>
+						>
+							<span className="not-italic absolute top-[-20px] right-[-20px] bg-[lightblue] text-[#2f2f2f] text-[1rem] rounded-full w-[25px] h-[25px] flex justify-center items-center">
+								{cartCount}
+							</span>
+						</i>
 					</Link>
 					<Link to="favorites">
 						<i

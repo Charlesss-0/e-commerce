@@ -21,7 +21,7 @@ export function Cart() {
 	const firebaseApp = new FirebaseApp()
 	const [count, setCount] = useState(1)
 	const [data, setData] = useState([])
-	const { hideCart, setHideCart } = useAppContext()
+	const { hideCart, setHideCart, setCartCount } = useAppContext()
 	const [isEmpty, setIsEmpty] = useState(false)
 	const [isLoading, setIsLoading] = useState(false)
 
@@ -101,7 +101,10 @@ export function Cart() {
 												</div>
 												<i
 													className="fi fi-rr-trash hover:cursor-pointer"
-													onClick={() => firebaseApp.delete(key, 'cart')}
+													onClick={() => {
+														firebaseApp.delete(key, 'cart')
+														setCartCount(prev => prev - 1)
+													}}
 												></i>
 											</div>
 										</li>
