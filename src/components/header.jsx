@@ -84,6 +84,17 @@ const Item = styled.li`
 	`}
 `
 
+const Indicator = styled.div`
+	width: 12px;
+	height: 12px;
+	position: absolute;
+	top: -12px;
+	right: -12px;
+	border-radius: 50%;
+
+	${props => props.$active && `background: #9EC8B9;`}
+`
+
 export default function HeaderContent() {
 	const menuItems = ['Home', 'Products', 'About']
 
@@ -96,6 +107,7 @@ export default function HeaderContent() {
 		hideFav,
 		setHideFav,
 		cartCount,
+		favCount,
 	} = useAppContext()
 	const [focus, setFocus] = useState(false)
 
@@ -143,20 +155,16 @@ export default function HeaderContent() {
 							className="fi fi-rr-briefcase-blank relative"
 							onClick={() => setHideCart(!hideCart)}
 						>
-							<div
-								className={
-									cartCount
-										? 'w-[15px] h-[15px] bg-[#40A2E3] absolute top-[-12px] right-[-12px] rounded-full'
-										: ''
-								}
-							></div>
+							<Indicator $active={cartCount} />
 						</i>
 					</Link>
 					<Link to="favorites">
 						<i
-							className="fi fi-rr-heart"
+							className="fi fi-rr-heart relative"
 							onClick={() => setHideFav(!hideFav)}
-						></i>
+						>
+							<Indicator $active={favCount} />
+						</i>
 					</Link>
 					<i className="fi fi-rr-user"></i>
 				</div>

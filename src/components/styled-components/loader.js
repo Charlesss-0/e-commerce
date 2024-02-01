@@ -10,7 +10,7 @@ const spin = keyframes`
 	}
 `
 
-const Loader = styled.div`
+export const Loader = styled.div`
 	border: 4px solid #0004;
 	border-left-color: transparent;
 	width: 36px;
@@ -23,7 +23,3 @@ const Loader = styled.div`
 	left: 50%;
 	transform: translate(-50%, -50%);
 `
-
-export default function Loading() {
-	return <Loader></Loader>
-}

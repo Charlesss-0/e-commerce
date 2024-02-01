@@ -1,10 +1,14 @@
 import styled from 'styled-components'
-import { IconsContainer, PopUpContainer } from '../components/styled-components'
+import {
+	IconsContainer,
+	Loader,
+	PopUpContainer,
+} from '../components/styled-components'
 import { useEffect, useState } from 'react'
 import FirebaseApp from '../firebase/firebase'
 import { useAppContext } from '../context/context'
 import { fetchData } from '../utils/fetchData'
-import { EmptyMessage, Loading, SubHeading } from '../components'
+import { EmptyMessage, SubHeading } from '../components'
 
 export const Overlay = styled.div`
 	position: fixed;
@@ -67,7 +71,7 @@ export function Cart() {
 				<PopUpContainer>
 					<SubHeading>Cart</SubHeading>
 					{isLoading ? (
-						<Loading />
+						<Loader />
 					) : (
 						<ul className="flex flex-col gap-[1rem] h-full pb-[3rem] overflow-auto rounded-[0.5rem]">
 							{isEmpty ? (

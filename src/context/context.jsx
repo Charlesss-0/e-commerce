@@ -7,6 +7,7 @@ export function CartProvider({ children }) {
 	const [hideFav, setHideFav] = useState(false)
 	const [isScrolled, setIsScrolled] = useState(0)
 	const [cartCount, setCartCount] = useState(false)
+	const [favCount, setFavCount] = useState(false)
 
 	return (
 		<PageContext.Provider
@@ -19,6 +20,8 @@ export function CartProvider({ children }) {
 				setIsScrolled,
 				cartCount,
 				setCartCount,
+				favCount,
+				setFavCount,
 			}}
 		>
 			{children}

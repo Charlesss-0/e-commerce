@@ -2,14 +2,18 @@ import { useEffect, useState } from 'react'
 import FirebaseApp from '../firebase/firebase'
 import { useAppContext } from '../context/context'
 import { Overlay } from './cart'
-import { IconsContainer, PopUpContainer } from '../components/styled-components'
-import { EmptyMessage, Loading } from '../components'
+import {
+	IconsContainer,
+	Loader,
+	PopUpContainer,
+} from '../components/styled-components'
+import { EmptyMessage } from '../components'
 import { fetchData } from '../utils/fetchData'
 
 export function Favorites() {
 	const firebaseApp = new FirebaseApp()
 	const [data, setData] = useState([])
-	const { hideFav, setHideFav } = useAppContext()
+	const { hideFav, setHideFav, setFavCount } = useAppContext()
 	const [isEmpty, setIsEmpty] = useState(false)
 	const [isLoading, setIsLoading] = useState(false)
 
@@ -18,10 +22,12 @@ export function Favorites() {
 	}, [firebaseApp.database])
 
 	useEffect(() => {
-		if (data.length == 0) {
+		if (data.length === 0) {
 			setIsEmpty(false)
+			setFavCount(false)
 		} else {
 			setIsEmpty(true)
+			setFavCount(true)
 		}
 	}, [data])
 
@@ -45,7 +51,7 @@ export function Favorites() {
 				<PopUpContainer $activeClass>
 					<h1 className="text-center text-[1.3rem] mb-[2rem]">Favorites</h1>
 					{isLoading ? (
-						<Loading />
+						<Loader />
 					) : (
 						<ul className="flex flex-wrap justify-around gap-[2rem] h-full pb-[3rem] overflow-auto">
 							{isEmpty ? (
