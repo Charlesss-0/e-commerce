@@ -228,10 +228,7 @@ export default function Products() {
 									<IconsContainer $condition>
 										<i
 											className="fi fi-rr-shopping-cart"
-											onClick={() => {
-												firebaseApp.add(item, 'cart')
-												setCartCount(prev => prev + 1)
-											}}
+											onClick={() => firebaseApp.add(item, 'cart')}
 										></i>
 										<i
 											className="fi fi-rr-heart"

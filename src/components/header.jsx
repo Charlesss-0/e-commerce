@@ -143,9 +143,13 @@ export default function HeaderContent() {
 							className="fi fi-rr-briefcase-blank relative"
 							onClick={() => setHideCart(!hideCart)}
 						>
-							<span className="not-italic absolute top-[-20px] right-[-20px] bg-[lightblue] text-[#2f2f2f] text-[1rem] rounded-full w-[25px] h-[25px] flex justify-center items-center">
-								{cartCount}
-							</span>
+							<div
+								className={
+									cartCount
+										? 'w-[15px] h-[15px] bg-[#40A2E3] absolute top-[-12px] right-[-12px] rounded-full'
+										: ''
+								}
+							></div>
 						</i>
 					</Link>
 					<Link to="favorites">

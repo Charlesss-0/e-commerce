@@ -32,8 +32,10 @@ export function Cart() {
 	useEffect(() => {
 		if (data.length === 0) {
 			setIsEmpty(false)
+			setCartCount(false)
 		} else {
 			setIsEmpty(true)
+			setCartCount(true)
 		}
 	}, [data])
 
@@ -101,10 +103,7 @@ export function Cart() {
 												</div>
 												<i
 													className="fi fi-rr-trash hover:cursor-pointer"
-													onClick={() => {
-														firebaseApp.delete(key, 'cart')
-														setCartCount(prev => prev - 1)
-													}}
+													onClick={() => firebaseApp.delete(key, 'cart')}
 												></i>
 											</div>
 										</li>

@@ -6,7 +6,7 @@ export function CartProvider({ children }) {
 	const [hideCart, setHideCart] = useState(false)
 	const [hideFav, setHideFav] = useState(false)
 	const [isScrolled, setIsScrolled] = useState(0)
-	const [cartCount, setCartCount] = useState(0)
+	const [cartCount, setCartCount] = useState(false)
 
 	return (
 		<PageContext.Provider
