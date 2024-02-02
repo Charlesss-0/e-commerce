@@ -1,6 +1,6 @@
-import styled from 'styled-components'
 import {
 	IconsContainer,
+	Overlay,
 	Loader,
 	PopUpContainer,
 } from '../components/styled-components'
@@ -10,20 +10,8 @@ import { useAppContext } from '../context/context'
 import { fetchData } from '../utils/fetchData'
 import { EmptyMessage, SubHeading } from '../components'
 
-export const Overlay = styled.div`
-	position: fixed;
-	top: 0;
-	left: 0;
-	width: 100vw;
-	height: 100vh;
-	z-index: 20;
-	overflow: hidden;
-	background-color: #000a;
-`
-
 export function Cart() {
 	const firebaseApp = new FirebaseApp()
-	const [count, setCount] = useState(1)
 	const [data, setData] = useState([])
 	const { hideCart, setHideCart, setCartCount } = useAppContext()
 	const [isEmpty, setIsEmpty] = useState(false)
@@ -43,12 +31,23 @@ export function Cart() {
 		}
 	}, [data])
 
-	const handleAdd = () => {
-		setCount(count => (count < 100 ? count + 1 : 100))
-	}
+	const updateCount = async (key, operation) => {
+		try {
+			const currentCount = await firebaseApp.fetchData('cart', key)
+			let newCount
 
-	const handleSubtract = () => {
-		setCount(count => (count > 1 ? count - 1 : 1))
+			if (operation === 'add') {
+				newCount = Math.min(currentCount + 1, 100)
+			} else if (operation === 'subtract') {
+				newCount = Math.max(currentCount - 1, 1)
+			} else {
+				throw new Error('Invalid operation')
+			}
+
+			await firebaseApp.update('cart', key, { count: newCount })
+		} catch (error) {
+			console.error('Error updating count', error)
+		}
 	}
 
 	useEffect(() => {
@@ -98,12 +97,15 @@ export function Cart() {
 												<div className="flex items-center gap-[1rem] [&>i]:hover:cursor-pointer">
 													<i
 														className="fi fi-rr-minus-circle"
-														onClick={handleSubtract}
+														onClick={() => updateCount(key, 'subtract')}
 													></i>
 													<p className="select-none text-center w-[40px]">
-														{count}
+														{value.count}
 													</p>
-													<i className="fi fi-rr-add" onClick={handleAdd}></i>
+													<i
+														className="fi fi-rr-add"
+														onClick={() => updateCount(key, 'add')}
+													></i>
 												</div>
 												<i
 													className="fi fi-rr-trash hover:cursor-pointer"

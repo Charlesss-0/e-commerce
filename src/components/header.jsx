@@ -88,8 +88,8 @@ const Indicator = styled.div`
 	width: 12px;
 	height: 12px;
 	position: absolute;
-	top: -12px;
-	right: -12px;
+	top: -10px;
+	right: -10px;
 	border-radius: 50%;
 
 	${props => props.$active && `background: #9EC8B9;`}

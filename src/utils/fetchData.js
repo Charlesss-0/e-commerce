@@ -5,7 +5,7 @@ export async function fetchData(setIsLoading, setData, ref) {
 	try {
 		setIsLoading(true)
 
-		await firebaseApp.fetch(setData, ref)
+		await firebaseApp.fetchAndSet(setData, ref)
 
 		setIsLoading(false)
 	} catch (error) {

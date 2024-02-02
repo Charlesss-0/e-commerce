@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react'
 import FirebaseApp from '../firebase/firebase'
 import { useAppContext } from '../context/context'
-import { Overlay } from './cart'
 import {
 	IconsContainer,
+	Overlay,
 	Loader,
 	PopUpContainer,
 } from '../components/styled-components'

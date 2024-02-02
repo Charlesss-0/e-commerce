@@ -1,5 +1,12 @@
 import { initializeApp } from 'firebase/app'
-import { getDatabase, ref, push, onValue, remove } from 'firebase/database'
+import {
+	getDatabase,
+	ref,
+	push,
+	onValue,
+	remove,
+	update,
+} from 'firebase/database'
 
 export default class FirebaseApp {
 	constructor() {
@@ -24,7 +31,7 @@ export default class FirebaseApp {
 		push(dbRef, value)
 	}
 
-	fetch(setData, reference) {
+	fetchAndSet(setData, reference) {
 		return new Promise((resolve, reject) => {
 			const dbRef = ref(this.database, `${reference}`)
 			onValue(
@@ -51,10 +58,28 @@ export default class FirebaseApp {
 		})
 	}
 
+	fetchData(reference, key) {
+		return new Promise((resolve, reject) => {
+			const dbRef = ref(this.database, `${reference}/${key}`)
+
+			onValue(dbRef, snapshot => {
+				const data = snapshot.val()?.count || 0
+				resolve(data)
+			}),
+				error => {
+					reject(error)
+				}
+		})
+	}
+
 	delete(key, reference) {
 		const itemRef = ref(this.database, `${reference}/${key}`)
 		remove(itemRef)
 	}
 
-	update(key, reference) {}
+	update(reference, key, updatedData) {
+		const itemRef = ref(this.database, `${reference}/${key}`)
+
+		update(itemRef, updatedData)
+	}
 }
