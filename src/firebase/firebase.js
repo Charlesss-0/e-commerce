@@ -6,6 +6,9 @@ import {
 	onValue,
 	remove,
 	update,
+	orderByChild,
+	query,
+	get,
 } from 'firebase/database'
 
 export default class FirebaseApp {
@@ -26,9 +29,24 @@ export default class FirebaseApp {
 		})
 	}
 
-	add(value, reference) {
+	async add(value, reference) {
 		const dbRef = ref(this.database, `${reference}/`)
-		push(dbRef, value)
+
+		try {
+			const nodeQuery = query(dbRef, orderByChild('id'))
+			const snapshot = await get(nodeQuery)
+
+			const data = snapshot.val() || {}
+			const id = Object.values(data).some(item => item.id === value.id)
+
+			if (!id) {
+				push(dbRef, value)
+			} else {
+				return
+			}
+		} catch (error) {
+			console.error('Error fetching data:', error)
+		}
 	}
 
 	fetchAndSet(setData, reference) {
@@ -62,13 +80,29 @@ export default class FirebaseApp {
 		return new Promise((resolve, reject) => {
 			const dbRef = ref(this.database, `${reference}/${key}`)
 
-			onValue(dbRef, snapshot => {
-				const data = snapshot.val()?.count || 0
-				resolve(data)
-			}),
-				error => {
-					reject(error)
-				}
+			if (key) {
+				onValue(
+					dbRef,
+					snapshot => {
+						const data = snapshot.val()?.count || 0
+						resolve(data)
+					},
+					error => {
+						reject(error)
+					}
+				)
+			} else {
+				onValue(
+					dbRef,
+					snapshot => {
+						const data = snapshot.val()
+						resolve(data)
+					},
+					error => {
+						reject(error)
+					}
+				)
+			}
 		})
 	}
 

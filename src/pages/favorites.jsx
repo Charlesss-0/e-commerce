@@ -8,7 +8,7 @@ import {
 	PopUpContainer,
 } from '../components/styled-components'
 import { EmptyMessage } from '../components'
-import { fetchData } from '../utils/fetchData'
+import { fetchData } from '../utils'
 
 export function Favorites() {
 	const firebaseApp = new FirebaseApp()

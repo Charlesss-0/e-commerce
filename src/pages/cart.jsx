@@ -4,11 +4,12 @@ import {
 	Loader,
 	PopUpContainer,
 } from '../components/styled-components'
-import { useEffect, useState } from 'react'
-import FirebaseApp from '../firebase/firebase'
-import { useAppContext } from '../context/context'
-import { fetchData } from '../utils/fetchData'
 import { EmptyMessage, SubHeading } from '../components'
+import { fetchData, updateCount } from '../utils'
+
+import FirebaseApp from '../firebase/firebase'
+import { useEffect, useState } from 'react'
+import { useAppContext } from '../context/context'
 
 export function Cart() {
 	const firebaseApp = new FirebaseApp()
@@ -30,25 +31,6 @@ export function Cart() {
 			setCartCount(true)
 		}
 	}, [data])
-
-	const updateCount = async (key, operation) => {
-		try {
-			const currentCount = await firebaseApp.fetchData('cart', key)
-			let newCount
-
-			if (operation === 'add') {
-				newCount = Math.min(currentCount + 1, 100)
-			} else if (operation === 'subtract') {
-				newCount = Math.max(currentCount - 1, 1)
-			} else {
-				throw new Error('Invalid operation')
-			}
-
-			await firebaseApp.update('cart', key, { count: newCount })
-		} catch (error) {
-			console.error('Error updating count', error)
-		}
-	}
 
 	useEffect(() => {
 		document.body.style.overflow = hideCart ? 'hidden' : 'auto'

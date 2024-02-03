@@ -1,7 +1,8 @@
 import FirebaseApp from '../firebase/firebase'
-const firebaseApp = new FirebaseApp()
 
-export async function fetchData(setIsLoading, setData, ref) {
+export default async function fetchData(setIsLoading, setData, ref) {
+	const firebaseApp = new FirebaseApp()
+
 	try {
 		setIsLoading(true)
 
