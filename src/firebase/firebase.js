@@ -1,3 +1,4 @@
+import { v4 as uuid } from 'uuid'
 import { initializeApp } from 'firebase/app'
 import {
 	getDatabase,
@@ -33,16 +34,16 @@ export default class FirebaseApp {
 		const dbRef = ref(this.database, `${reference}/`)
 
 		try {
-			const nodeQuery = query(dbRef, orderByChild('id'))
+			const nodeQuery = query(dbRef, orderByChild('img'))
 			const snapshot = await get(nodeQuery)
 
 			const data = snapshot.val() || {}
-			const id = Object.values(data).some(item => item.id === value.id)
+			const idExists = Object.values(data).some(item => item.img === value.img)
 
-			if (!id) {
+			if (!idExists) {
 				push(dbRef, value)
 			} else {
-				return
+				throw new Error('Id already exists')
 			}
 		} catch (error) {
 			console.error('Error fetching data:', error)
