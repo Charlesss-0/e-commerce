@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import { Link, useLocation } from 'react-router-dom'
 import { useAppContext } from '../context/context'
+import FirebaseApp from '../firebase/firebase'
 
 const Header = styled.header`
 	background: none;
@@ -95,10 +96,55 @@ const Indicator = styled.div`
 	${props => props.$active && `background: #9EC8B9;`}
 `
 
-export default function HeaderContent() {
-	const menuItems = ['Home', 'Products', 'About']
+const SignContainer = styled.div`
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	gap: 1rem;
+	width: max-content;
+	margin-top: 1rem;
+	padding: 1rem;
+	border-radius: 0.5rem;
+	border: 1px solid #bfbfbf;
+	background: #efefef;
 
-	const location = useLocation()
+	position: absolute;
+	right: 0;
+
+	${props =>
+		props.$show &&
+		`
+		display: none;
+	`}
+
+	& > h1 {
+		font-size: 1rem;
+		text-align: center;
+	}
+
+	& > button {
+		font-size: 1rem;
+		width: 100px;
+		padding: 0.5rem 0;
+		outline: 1px solid #000;
+		transition: all 300ms;
+		user-select: none;
+
+		&:hover {
+			background: #2f2f2f;
+			color: #efefef;
+		}
+
+		&:active {
+			transform: translate(0em, 0.2em);
+		}
+	}
+`
+
+export default function HeaderContent() {
+	const firebaseApp = new FirebaseApp()
+	const menuItems = ['Home', 'Products', 'About']
 	const {
 		isScrolled,
 		setIsScrolled,
@@ -109,7 +155,11 @@ export default function HeaderContent() {
 		cartCount,
 		favCount,
 	} = useAppContext()
+
+	const location = useLocation()
 	const [focus, setFocus] = useState(false)
+	const [hide, setHide] = useState(true)
+	const [signedUser, setSignedUser] = useState('')
 
 	useEffect(() => {
 		const handleScroll = () => {
@@ -126,6 +176,31 @@ export default function HeaderContent() {
 	const handleFocus = () => {
 		setFocus(!focus)
 	}
+
+	const handleSignIn = async () => {
+		try {
+			await firebaseApp.signInWithGoogle()
+		} catch (error) {
+			console.error('Error signing in', error.message)
+		}
+	}
+
+	const handleSignOut = async () => {
+		try {
+			await firebaseApp.signOut()
+			setSignedUser('')
+		} catch (error) {
+			console.error('Error signing out', error.message)
+		}
+	}
+
+	useEffect(() => {
+		const unsubscribe = firebaseApp.auth.onAuthStateChanged(user => {
+			setSignedUser(user)
+		})
+
+		return () => unsubscribe()
+	}, [])
 
 	return (
 		<Header $primary={isScrolled}>
@@ -166,7 +241,38 @@ export default function HeaderContent() {
 							<Indicator $active={favCount} />
 						</i>
 					</Link>
-					<i className="fi fi-rr-user"></i>
+					<>
+						{signedUser ? (
+							<div>
+								<img
+									src={signedUser.photoURL}
+									alt={signedUser.displayName}
+									onClick={() => setHide(!hide)}
+									className="rounded-full w-[1.5rem] hover:cursor-pointer"
+								/>
+
+								<SignContainer $show={hide}>
+									<h1>
+										Signed in as <br />
+										{signedUser.displayName}
+									</h1>
+									<button onClick={handleSignOut}>Sign Out</button>
+								</SignContainer>
+							</div>
+						) : (
+							<div className="relative">
+								<i
+									className="fi fi-rr-user hover:cursor-pointer"
+									onClick={() => setHide(!hide)}
+								></i>
+
+								<SignContainer $show={hide}>
+									<button>Sign Up</button>
+									<button onClick={handleSignIn}>Sign In</button>
+								</SignContainer>
+							</div>
+						)}
+					</>
 				</div>
 			</div>
 

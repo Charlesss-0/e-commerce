@@ -1,14 +1,14 @@
+import { EmptyMessage, SubHeading } from '../components'
 import {
 	IconsContainer,
-	Overlay,
 	Loader,
+	Overlay,
 	PopUpContainer,
 } from '../components/styled-components'
-import { EmptyMessage, SubHeading } from '../components'
 import { fetchData, updateCount } from '../utils'
+import { useEffect, useState } from 'react'
 
 import FirebaseApp from '../firebase/firebase'
-import { useEffect, useState } from 'react'
 import { useAppContext } from '../context/context'
 
 export function Cart() {

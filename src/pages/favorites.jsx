@@ -1,14 +1,15 @@
-import { useEffect, useState } from 'react'
-import FirebaseApp from '../firebase/firebase'
-import { useAppContext } from '../context/context'
 import {
 	IconsContainer,
-	Overlay,
 	Loader,
+	Overlay,
 	PopUpContainer,
 } from '../components/styled-components'
+import { useEffect, useState } from 'react'
+
 import { EmptyMessage } from '../components'
+import FirebaseApp from '../firebase/firebase'
 import { fetchData } from '../utils'
+import { useAppContext } from '../context/context'
 
 export function Favorites() {
 	const firebaseApp = new FirebaseApp()

@@ -1,13 +1,13 @@
-import FirebaseApp from '../../firebase/firebase'
-import { Outlet } from 'react-router-dom'
-import { useState } from 'react'
 import styled, { keyframes } from 'styled-components'
 
-import HeaderContent from '../../components/header'
+import FirebaseApp from '../../firebase/firebase'
 import Footer from '../../components/footer'
+import HeaderContent from '../../components/header'
 import { IconsContainer } from '../../components/styled-components'
+import { Outlet } from 'react-router-dom'
 import { products } from '../../data/data'
 import { useAppContext } from '../../context/context'
+import { useState } from 'react'
 
 const Hero = styled.div`
 	background: url(https://images.unsplash.com/photo-1524758631624-e2822e304c36?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D);
@@ -169,7 +169,6 @@ export default function Products() {
 	]
 	const firebaseApp = new FirebaseApp()
 	const [listGrid, setListGrid] = useState(false)
-	const { setCartCount } = useAppContext()
 
 	return (
 		<>

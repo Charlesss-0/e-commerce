@@ -1,21 +1,30 @@
-import { v4 as uuid } from 'uuid'
-import { initializeApp } from 'firebase/app'
 import {
+	browserLocalPersistence,
+	getAuth,
+	GoogleAuthProvider,
+	setPersistence,
+	signInWithPopup,
+	signOut,
+} from 'firebase/auth'
+import {
+	get,
 	getDatabase,
-	ref,
-	push,
 	onValue,
+	orderByChild,
+	push,
+	query,
+	ref,
 	remove,
 	update,
-	orderByChild,
-	query,
-	get,
 } from 'firebase/database'
+import { initializeApp } from 'firebase/app'
 
-export default class FirebaseApp {
+class FirebaseApp {
 	constructor() {
-		this.firebaseApp = this.initialize()
-		this.database = getDatabase(this.firebaseApp)
+		this.initialize = this.initialize()
+		this.database = getDatabase()
+		this.auth = getAuth()
+		this.provider = new GoogleAuthProvider()
 	}
 
 	initialize() {
@@ -28,6 +37,24 @@ export default class FirebaseApp {
 			messagingSenderId: '684968939650',
 			appId: '1:684968939650:web:b800b40fbed2857c8b649b',
 		})
+	}
+
+	async signInWithGoogle() {
+		try {
+			await setPersistence(this.auth, browserLocalPersistence)
+			const result = await signInWithPopup(this.auth, this.provider)
+			return result.user
+		} catch (error) {
+			throw new Error(error)
+		}
+	}
+
+	async signOut() {
+		try {
+			await signOut(this.auth)
+		} catch (error) {
+			throw new Error('Error signing out', error)
+		}
 	}
 
 	async add(value, reference) {
@@ -43,7 +70,7 @@ export default class FirebaseApp {
 			if (!idExists) {
 				push(dbRef, value)
 			} else {
-				throw new Error('Id already exists')
+				return
 			}
 		} catch (error) {
 			console.error('Error fetching data:', error)
@@ -118,3 +145,5 @@ export default class FirebaseApp {
 		update(itemRef, updatedData)
 	}
 }
+
+export default FirebaseApp
