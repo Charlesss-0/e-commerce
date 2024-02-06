@@ -22,13 +22,15 @@ import { initializeApp } from 'firebase/app'
 
 class FirebaseApp {
 	constructor() {
-		this.initialize = this.initialize()
+		this.initialize = this.initializeFirebase()
 		this.database = getDatabase()
 		this.auth = getAuth()
 		this.provider = new GoogleAuthProvider()
+		this.currentUser = null
+		this.init()
 	}
 
-	initialize() {
+	initializeFirebase() {
 		return initializeApp({
 			apiKey: 'AIzaSyAiT-J9wqX92GJFWPMSxebdCEM1xCFyIz0',
 			authDomain: 'e-commerce-ba9e2.firebaseapp.com',
@@ -53,9 +55,21 @@ class FirebaseApp {
 	async signOut() {
 		try {
 			await signOut(this.auth)
+			return []
 		} catch (error) {
 			throw new Error(error)
 		}
+	}
+
+	init() {
+		return new Promise(resolve => {
+			const unsubscribe = this.auth.onAuthStateChanged(user => {
+				this.currentUser = user
+				resolve()
+			})
+
+			return unsubscribe
+		})
 	}
 
 	async add(value, reference) {
@@ -76,6 +90,7 @@ class FirebaseApp {
 			if (!idExists) {
 				push(dbRef, value)
 			} else {
+				console.warn('ID already exists')
 				return
 			}
 		} catch (error) {
@@ -83,84 +98,99 @@ class FirebaseApp {
 		}
 	}
 
-	fetchAndSet(setData, reference) {
+	async fetchAndSet(setData, reference) {
+		await this.init()
+
 		return new Promise((resolve, reject) => {
-			this.auth.onAuthStateChanged(user => {
-				if (user) {
-					const dbRef = ref(this.database, `${reference}/${user.uid}`)
-					const userRef = query(dbRef, orderByChild('uid'), equalTo(user.uid))
+			if (this.currentUser) {
+				const dbRef = ref(this.database, `${reference}/${this.currentUser.uid}`)
+				const userRef = query(
+					dbRef,
+					orderByChild('uid'),
+					equalTo(this.currentUser.uid)
+				)
 
-					onValue(
-						userRef,
-						snapshot => {
-							const data = snapshot.val()
+				onValue(
+					userRef,
+					snapshot => {
+						const data = snapshot.val()
 
-							if (data) {
-								const result = Object.entries(data).map(([key, value]) => ({
-									key,
-									value,
-								}))
+						if (data) {
+							const result = Object.entries(data).map(([key, value]) => ({
+								key,
+								value,
+							}))
 
-								setData(result)
-								resolve(result)
-							} else {
-								setData([])
-								resolve([])
-							}
-						},
-						error => {
-							console.log('Error in onValue:', error)
-							reject(error)
+							setData(result)
+							resolve(result)
+						} else {
+							setData([])
+							resolve([])
 						}
-					)
-				} else {
-					setData([])
-					console.error('No user is authenticated')
-					reject(new Error('No user authenticated'))
-				}
-			})
+					},
+					error => {
+						console.log('Error in onValue:', error)
+						reject(error)
+					}
+				)
+			} else {
+				setData([])
+				console.error('No user authenticated')
+				reject()
+			}
 		})
 	}
 
-	fetchData(reference, key) {
+	fetchToUpdate(reference, key) {
 		return new Promise((resolve, reject) => {
-			const dbRef = ref(this.database, `${reference}/${key}`)
+			const dbRef = ref(
+				this.database,
+				`${reference}/${this.currentUser.uid}/${key}`
+			)
 
-			if (key) {
+			if (this.currentUser) {
 				onValue(
 					dbRef,
 					snapshot => {
-						const data = snapshot.val()?.count || 0
-						resolve(data)
+						const data = snapshot.val()
+						const count = data?.count
+
+						if (!isNaN(count)) {
+							resolve(count)
+						} else {
+							console.error('Invalid count in fetchToUpdate:', count)
+							resolve(null)
+						}
 					},
 					error => {
 						reject(error)
 					}
 				)
 			} else {
-				onValue(
-					dbRef,
-					snapshot => {
-						const data = snapshot.val()
-						resolve(data)
-					},
-					error => {
-						reject(error)
-					}
-				)
+				console.error('No user authenticated')
+				resolve(null)
 			}
 		})
 	}
 
 	delete(key, reference) {
-		const itemRef = ref(this.database, `${reference}/${key}`)
+		const itemRef = ref(
+			this.database,
+			`${reference}/${this.currentUser.uid}/${key}`
+		)
 		remove(itemRef)
 	}
 
-	update(reference, key, updatedData) {
-		const itemRef = ref(this.database, `${reference}/${key}`)
-
-		update(itemRef, updatedData)
+	async update(reference, key, updatedData) {
+		try {
+			const itemRef = ref(
+				this.database,
+				`${reference}/${this.currentUser.uid}/${key}`
+			)
+			await update(itemRef, updatedData)
+		} catch (error) {
+			console.error('Error updating data:', error)
+		}
 	}
 }
 

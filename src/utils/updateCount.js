@@ -1,18 +1,19 @@
-import FirebaseApp from '../firebase/firebase'
-
-export default async function updateCount(key, operation) {
-	const firebaseApp = new FirebaseApp()
-
+export default async function updateCount(firebaseApp, key, operation) {
 	try {
-		const currentCount = await firebaseApp.fetchData('cart', key)
+		const currentCount = await firebaseApp.fetchToUpdate('cart', key)
 		let newCount
 
-		if (operation === 'add') {
-			newCount = Math.min(currentCount + 1, 100)
-		} else if (operation === 'subtract') {
-			newCount = Math.max(currentCount - 1, 1)
+		if (!isNaN(currentCount)) {
+			if (operation === 'add') {
+				newCount = Math.min(currentCount + 1, 100)
+			} else if (operation === 'subtract') {
+				newCount = Math.max(currentCount - 1, 1)
+			} else {
+				throw new Error('Invalid operation')
+			}
 		} else {
-			throw new Error('Invalid operation')
+			console.error('Invalid currentCount:', currentCount)
+			return
 		}
 
 		await firebaseApp.update('cart', key, { count: newCount })

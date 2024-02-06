@@ -86,7 +86,7 @@ export function Cart() {
 													</p>
 													<i
 														className="fi fi-rr-add"
-														onClick={() => updateCount(key, 'add')}
+														onClick={() => updateCount(firebaseApp, key, 'add')}
 													></i>
 												</div>
 												<i
