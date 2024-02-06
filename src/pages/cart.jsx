@@ -79,7 +79,9 @@ export function Cart() {
 												<div className="flex items-center gap-[1rem] [&>i]:hover:cursor-pointer">
 													<i
 														className="fi fi-rr-minus-circle"
-														onClick={() => updateCount(key, 'subtract')}
+														onClick={() =>
+															updateCount(firebaseApp, key, 'subtract')
+														}
 													></i>
 													<p className="select-none text-center w-[40px]">
 														{value.count}
