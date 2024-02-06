@@ -12,25 +12,25 @@ const routes = [
 		errorElement: <ErrorPage />,
 		children: [
 			{
-				path: 'cart/',
+				path: 'cart',
 				element: <Cart />,
 			},
 			{
-				path: 'favorites/',
+				path: 'favorites',
 				element: <Favorites />,
 			},
 		],
 	},
 	{
-		path: 'products/',
+		path: 'products',
 		element: <Products />,
 		children: [
 			{
-				path: 'cart/',
+				path: 'cart',
 				element: <Cart />,
 			},
 			{
-				path: 'favorites/',
+				path: 'favorites',
 				element: <Favorites />,
 			},
 		],
