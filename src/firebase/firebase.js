@@ -7,6 +7,7 @@ import {
 	signOut,
 } from 'firebase/auth'
 import {
+	equalTo,
 	get,
 	getDatabase,
 	onValue,
@@ -53,14 +54,19 @@ class FirebaseApp {
 		try {
 			await signOut(this.auth)
 		} catch (error) {
-			throw new Error('Error signing out', error)
+			throw new Error(error)
 		}
 	}
 
 	async add(value, reference) {
-		const dbRef = ref(this.database, `${reference}/`)
+		const dbRef = ref(
+			this.database,
+			`${reference}/${this.auth.currentUser.uid}`
+		)
 
 		try {
+			value.uid = this.auth.currentUser.uid
+
 			const nodeQuery = query(dbRef, orderByChild('img'))
 			const snapshot = await get(nodeQuery)
 
@@ -73,34 +79,46 @@ class FirebaseApp {
 				return
 			}
 		} catch (error) {
-			console.error('Error fetching data:', error)
+			console.error('Error adding data:', error)
 		}
 	}
 
 	fetchAndSet(setData, reference) {
 		return new Promise((resolve, reject) => {
-			const dbRef = ref(this.database, `${reference}`)
-			onValue(
-				dbRef,
-				snapshot => {
-					const data = snapshot.val()
+			this.auth.onAuthStateChanged(user => {
+				if (user) {
+					const dbRef = ref(this.database, `${reference}/${user.uid}`)
+					const userRef = query(dbRef, orderByChild('uid'), equalTo(user.uid))
 
-					if (data) {
-						const result = Object.entries(data).map(([key, value]) => ({
-							key,
-							value,
-						}))
-						setData(result)
-						resolve(result)
-					} else {
-						setData([])
-						resolve([])
-					}
-				},
-				error => {
-					reject(error)
+					onValue(
+						userRef,
+						snapshot => {
+							const data = snapshot.val()
+
+							if (data) {
+								const result = Object.entries(data).map(([key, value]) => ({
+									key,
+									value,
+								}))
+
+								setData(result)
+								resolve(result)
+							} else {
+								setData([])
+								resolve([])
+							}
+						},
+						error => {
+							console.log('Error in onValue:', error)
+							reject(error)
+						}
+					)
+				} else {
+					setData([])
+					console.error('No user is authenticated')
+					reject(new Error('No user authenticated'))
 				}
-			)
+			})
 		})
 	}
 

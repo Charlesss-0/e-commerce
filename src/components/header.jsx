@@ -108,14 +108,12 @@ const SignContainer = styled.div`
 	border-radius: 0.5rem;
 	border: 1px solid #bfbfbf;
 	background: #efefef;
-
-	position: absolute;
-	right: 0;
+	transition: all 300ms;
 
 	${props =>
 		props.$show &&
 		`
-		display: none;
+		transform: translateX(110%);
 	`}
 
 	& > h1 {
@@ -243,7 +241,7 @@ export default function HeaderContent() {
 					</Link>
 					<>
 						{signedUser ? (
-							<div>
+							<div className="relative">
 								<img
 									src={signedUser.photoURL}
 									alt={signedUser.displayName}
@@ -251,13 +249,15 @@ export default function HeaderContent() {
 									className="rounded-full w-[1.5rem] hover:cursor-pointer"
 								/>
 
-								<SignContainer $show={hide}>
-									<h1>
-										Signed in as <br />
-										{signedUser.displayName}
-									</h1>
-									<button onClick={handleSignOut}>Sign Out</button>
-								</SignContainer>
+								<div className="overflow-hidden absolute right-0 w-[max-content]">
+									<SignContainer $show={hide}>
+										<h1>
+											Signed in as <br />
+											{signedUser.displayName}
+										</h1>
+										<button onClick={handleSignOut}>Sign Out</button>
+									</SignContainer>
+								</div>
 							</div>
 						) : (
 							<div className="relative">
@@ -266,10 +266,12 @@ export default function HeaderContent() {
 									onClick={() => setHide(!hide)}
 								></i>
 
-								<SignContainer $show={hide}>
-									<button>Sign Up</button>
-									<button onClick={handleSignIn}>Sign In</button>
-								</SignContainer>
+								<div className="overflow-hidden absolute right-0 w-[max-content]">
+									<SignContainer $show={hide}>
+										<button>Sign Up</button>
+										<button onClick={handleSignIn}>Sign In</button>
+									</SignContainer>
+								</div>
 							</div>
 						)}
 					</>
