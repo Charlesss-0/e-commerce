@@ -1,4 +1,4 @@
-import { Link, useRouteError } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 
 const ErrorContainer = styled.div`
@@ -37,16 +37,13 @@ const Button = styled.button`
 	}
 `
 
-export default function ErrorPage() {
-	const error = useRouteError()
-	console.error(error)
-
+export default function ErrorPage({ error }) {
 	return (
 		<ErrorContainer>
 			<div className="h-full flex flex-col items-center justify-center gap-[2rem]">
 				<h1 className="text-[5rem] font-bold">Oops!</h1>
 				<p className="text-[2rem]">Sorry, an unexpected error has occurred.</p>
-				<p className="italic">{error.statusText || error.message}</p>
+				<p className="italic">Not found!</p>
 				<Link to="/">
 					<Button>Go Home</Button>
 				</Link>

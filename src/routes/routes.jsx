@@ -3,40 +3,25 @@ import { Cart } from '../pages/cart'
 import ErrorPage from '../pages/error/errorPage'
 import { Favorites } from '../pages/favorites'
 import Products from '../pages/shop/products'
-import { createBrowserRouter } from 'react-router-dom'
+import AboutPage from '../pages/about'
+import { Routes, Route } from 'react-router-dom'
 
-const routes = [
-	{
-		path: '/',
-		element: <App />,
-		errorElement: <ErrorPage />,
-		children: [
-			{
-				path: 'cart',
-				element: <Cart />,
-			},
-			{
-				path: 'favorites',
-				element: <Favorites />,
-			},
-		],
-	},
-	{
-		path: 'products',
-		element: <Products />,
-		children: [
-			{
-				path: 'cart',
-				element: <Cart />,
-			},
-			{
-				path: 'favorites',
-				element: <Favorites />,
-			},
-		],
-	},
-]
+const AppRoutes = () => (
+	<Routes onError={error => <ErrorPage error={error} />}>
+		<Route path="/" element={<App />}>
+			<Route path="cart" element={<Cart />} />
+			<Route path="favorites" element={<Favorites />} />
+		</Route>
 
-const Routes = createBrowserRouter(routes)
+		<Route path="products" element={<Products />}>
+			<Route path="cart" element={<Cart />} />
+			<Route path="favorites" element={<Favorites />} />
+		</Route>
 
-export default Routes
+		<Route path="about" element={<AboutPage />} />
+
+		<Route path="*" element={<ErrorPage />} />
+	</Routes>
+)
+
+export default AppRoutes
