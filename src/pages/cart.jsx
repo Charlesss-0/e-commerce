@@ -1,11 +1,10 @@
-import { EmptyMessage, SubHeading } from '../components'
+import { CartItem, EmptyMessage, SubHeading } from '../components'
 import {
-	IconsContainer,
 	Loader,
 	Overlay,
 	PopUpContainer,
 } from '../components/styled-components'
-import { fetchData, updateCount } from '../utils'
+import { fetchData } from '../utils'
 import { useEffect, useState } from 'react'
 
 import FirebaseApp from '../firebase/firebase'
@@ -14,7 +13,8 @@ import { useAppContext } from '../context/context'
 export function Cart() {
 	const firebaseApp = new FirebaseApp()
 	const [data, setData] = useState([])
-	const { hideCart, setHideCart, setCartCount } = useAppContext()
+	const { hideCart, setHideCart, setCartCount, isSignedIn, setIsSignedIn } =
+		useAppContext()
 	const [isEmpty, setIsEmpty] = useState(false)
 	const [isLoading, setIsLoading] = useState(false)
 
@@ -40,6 +40,10 @@ export function Cart() {
 		}
 	}, [hideCart])
 
+	useEffect(() => {
+		setIsSignedIn(!!firebaseApp.auth.currentUser)
+	}, [firebaseApp.auth.currentUser])
+
 	return (
 		<Overlay className={hideCart ? 'block' : 'hidden'}>
 			<div
@@ -56,51 +60,24 @@ export function Cart() {
 					) : (
 						<ul className="flex flex-col gap-[1rem] h-full pb-[3rem] overflow-auto rounded-[0.5rem]">
 							{isEmpty ? (
-								<>
-									{data.map(({ key, value }) => (
-										<li
-											key={key}
-											className="flex justify-between items-center p-[0.8rem] rounded-[0.5rem] bg-[#efefef] box-shadow"
-										>
-											<div className="flex gap-[1rem] text-[0.8rem] [&>img]:w-[100px] [&>img]:rounded-[0.3rem] [&>img]:border-solid [&>img]:border-2 [&>img]:border-[#aaa]">
-												<img src={value.img} />
-												<div className="flex flex-col justify-between">
-													<div>
-														<p>{value.details}</p>
-														<p>$ {value.price}</p>
-													</div>
-													<IconsContainer>
-														<i className="fi fi-rr-heart"></i>
-													</IconsContainer>
-												</div>
-											</div>
-
-											<div className="flex gap-[3rem] items-center px-[1rem]">
-												<div className="flex items-center gap-[1rem] [&>i]:hover:cursor-pointer">
-													<i
-														className="fi fi-rr-minus-circle"
-														onClick={() =>
-															updateCount(firebaseApp, key, 'subtract')
-														}
-													></i>
-													<p className="select-none text-center w-[40px]">
-														{value.count}
-													</p>
-													<i
-														className="fi fi-rr-add"
-														onClick={() => updateCount(firebaseApp, key, 'add')}
-													></i>
-												</div>
-												<i
-													className="fi fi-rr-trash hover:cursor-pointer"
-													onClick={() => firebaseApp.delete(key, 'cart')}
-												></i>
-											</div>
-										</li>
-									))}
-								</>
+								data.map(({ key, value }) => (
+									<CartItem
+										key={key}
+										id={key}
+										data={value}
+										firebaseApp={firebaseApp}
+									/>
+								))
 							) : (
-								<EmptyMessage>Cart is empty!</EmptyMessage>
+								<>
+									{isSignedIn ? (
+										<EmptyMessage>Cart is empty!</EmptyMessage>
+									) : (
+										<EmptyMessage>
+											Sign in to add items to the cart
+										</EmptyMessage>
+									)}
+								</>
 							)}
 						</ul>
 					)}

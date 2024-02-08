@@ -173,12 +173,16 @@ class FirebaseApp {
 		})
 	}
 
-	delete(key, reference) {
-		const itemRef = ref(
-			this.database,
-			`${reference}/${this.currentUser.uid}/${key}`
-		)
-		remove(itemRef)
+	async delete(key, reference) {
+		try {
+			const itemRef = ref(
+				this.database,
+				`${reference}/${this.currentUser.uid}/${key}`
+			)
+			await remove(itemRef)
+		} catch (error) {
+			console.error('Error deleting data:', error)
+		}
 	}
 
 	async update(reference, key, updatedData) {

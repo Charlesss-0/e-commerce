@@ -6,7 +6,7 @@ import {
 } from '../components/styled-components'
 import { useEffect, useState } from 'react'
 
-import { EmptyMessage } from '../components'
+import { EmptyMessage, FavoritesItem } from '../components'
 import FirebaseApp from '../firebase/firebase'
 import { fetchData } from '../utils'
 import { useAppContext } from '../context/context'
@@ -14,7 +14,8 @@ import { useAppContext } from '../context/context'
 export function Favorites() {
 	const firebaseApp = new FirebaseApp()
 	const [data, setData] = useState([])
-	const { hideFav, setHideFav, setFavCount } = useAppContext()
+	const { hideFav, setHideFav, setFavCount, isSignedIn, setIsSignedIn } =
+		useAppContext()
 	const [isEmpty, setIsEmpty] = useState(false)
 	const [isLoading, setIsLoading] = useState(false)
 
@@ -40,6 +41,10 @@ export function Favorites() {
 		}
 	}, [hideFav])
 
+	useEffect(() => {
+		setIsSignedIn(!!firebaseApp.auth.currentUser)
+	}, [firebaseApp.auth.currentUser])
+
 	return (
 		<Overlay className={hideFav ? 'block' : 'hidden'}>
 			<div
@@ -58,28 +63,24 @@ export function Favorites() {
 							{isEmpty ? (
 								<>
 									{data.map(({ key, value }) => (
-										<li
+										<FavoritesItem
 											key={key}
-											className="flex flex-col gap-[1rem] h-[max-content] mb-[2rem] rounded-[0.5rem] p-[0.8rem] bg-[#efefefaa] box-shadow [&>img]:w-[250px]  [&>img]:rounded-[0.5rem] [&>img]:shadow-md"
-										>
-											<img src={value.img} alt={value.details} />
-											<div className="flex justify-between">
-												<div>
-													<p>{value.details}</p>
-													<p>$ {value.price}</p>
-												</div>
-												<IconsContainer>
-													<i
-														onClick={() => firebaseApp.delete(key, 'favorites')}
-														className="fi fi-rr-heart"
-													></i>
-												</IconsContainer>
-											</div>
-										</li>
+											id={key}
+											data={value}
+											firebaseApp={firebaseApp}
+										/>
 									))}
 								</>
 							) : (
-								<EmptyMessage>Favorites is empty!</EmptyMessage>
+								<>
+									{isSignedIn ? (
+										<EmptyMessage>Favorites is empty!</EmptyMessage>
+									) : (
+										<EmptyMessage>
+											Sign in to add your favorite items
+										</EmptyMessage>
+									)}
+								</>
 							)}
 						</ul>
 					)}
