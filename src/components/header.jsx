@@ -92,8 +92,7 @@ const Indicator = styled.div`
 	top: -10px;
 	right: -10px;
 	border-radius: 50%;
-
-	${props => props.$active && `background: #9EC8B9;`}
+	background: #9ec8b9;
 `
 
 const SignContainer = styled.div`
@@ -228,7 +227,7 @@ export default function HeaderContent() {
 							className="fi fi-rr-briefcase-blank relative"
 							onClick={() => setHideCart(!hideCart)}
 						>
-							<Indicator $active={cartCount} />
+							{cartCount && firebaseApp.auth.currentUser ? <Indicator /> : ''}
 						</i>
 					</Link>
 					<Link to="favorites">
@@ -236,7 +235,7 @@ export default function HeaderContent() {
 							className="fi fi-rr-heart relative"
 							onClick={() => setHideFav(!hideFav)}
 						>
-							<Indicator $active={favCount} />
+							{favCount && firebaseApp.auth.currentUser ? <Indicator /> : ''}
 						</i>
 					</Link>
 					<>

@@ -129,7 +129,7 @@ class FirebaseApp {
 						}
 					},
 					error => {
-						console.log('Error in onValue:', error)
+						console.error('Error in onValue:', error)
 						reject(error)
 					}
 				)

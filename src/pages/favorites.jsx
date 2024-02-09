@@ -1,5 +1,4 @@
 import {
-	IconsContainer,
 	Loader,
 	Overlay,
 	PopUpContainer,
@@ -24,12 +23,12 @@ export function Favorites() {
 	}, [firebaseApp.database])
 
 	useEffect(() => {
-		if (data.length === 0) {
-			setIsEmpty(false)
-			setFavCount(false)
-		} else {
+		if (data.length > 0) {
 			setIsEmpty(true)
 			setFavCount(true)
+		} else {
+			setIsEmpty(false)
+			setFavCount(false)
 		}
 	}, [data])
 

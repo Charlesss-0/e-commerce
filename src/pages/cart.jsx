@@ -23,12 +23,12 @@ export function Cart() {
 	}, [firebaseApp.database])
 
 	useEffect(() => {
-		if (data.length === 0) {
-			setIsEmpty(false)
-			setCartCount(false)
-		} else {
+		if (data.length > 0) {
 			setIsEmpty(true)
 			setCartCount(true)
+		} else {
+			setIsEmpty(false)
+			setCartCount(false)
 		}
 	}, [data])
 
