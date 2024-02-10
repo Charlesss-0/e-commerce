@@ -1,14 +1,42 @@
-import { Link } from 'react-router-dom'
+import { Footer, HeaderContent } from '../components'
+
+import { Outlet } from 'react-router-dom'
+import moonlight from '../assets/moonlight.svg'
+import styled from 'styled-components'
+
+const AboutContainer = styled.div`
+	height: 100vh;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+`
 
 export default function AboutPage() {
 	return (
-		<div className="h-screen flex flex-col gap-[2rem] justify-center items-center bg-[url(https://images.unsplash.com/photo-1494438639946-1ebd1d20bf85?q=80&w=2067&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D)]">
-			<h1 className=" text-[1.5rem]">In Development!</h1>
-			<Link to="/">
-				<button className="border-solid border-2 border-[#2f2f2f] px-[1rem] py-[0.5rem] hover:bg-[#2f2f2f] hover:text-white transition-all duration-400">
-					Go back
-				</button>
-			</Link>
-		</div>
+		<>
+			<HeaderContent />
+			<AboutContainer>
+				<div className="bg-[#12372A] rounded-[1rem] text-white mt-[13rem] py-[2rem] px-[5rem] w-[90%]">
+					<div className="grid gap-[1rem] grid-cols-2 py-[2rem]">
+						<div className="flex flex-col justify-between">
+							<h1 className="text-[2rem] font-bold">About GC</h1>
+							<p>
+								Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+								eiusmod tempor incididunt ut labore et dolore magna aliqua.
+								Magna ac placerat vestibulum lectus mauris. Tincidunt arcu non
+								sodales neque. Eget dolor morbi non arcu risus. Dictumst
+								vestibulum rhoncus est pellentesque elit. Sed enim ut sem
+								viverra. Imperdiet massa tincidunt nunc pulvinar sapien et.
+								Tortor posuere ac ut consequat semper viverra nam libero justo.
+							</p>
+						</div>
+
+						<img src={moonlight} className="rounded-[1rem]" />
+					</div>
+				</div>
+			</AboutContainer>
+			<Footer />
+			<Outlet />
+		</>
 	)
 }

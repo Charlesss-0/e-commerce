@@ -18,7 +18,10 @@ const AppRoutes = () => (
 			<Route path="favorites" element={<Favorites />} />
 		</Route>
 
-		<Route path="about" element={<AboutPage />} />
+		<Route path="about" element={<AboutPage />}>
+			<Route path="cart" element={<Cart />} />
+			<Route path="favorites" element={<Favorites />} />
+		</Route>
 
 		<Route path="*" element={<ErrorPage />} />
 	</Routes>

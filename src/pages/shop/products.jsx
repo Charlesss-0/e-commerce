@@ -240,8 +240,8 @@ export default function Products() {
 					)}
 				</ListContainer>
 			</ProductsContainer>
-			<Outlet />
 			<Footer />
+			<Outlet />
 		</>
 	)
 }
