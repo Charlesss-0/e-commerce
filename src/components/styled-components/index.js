@@ -1,7 +1,15 @@
-import { IconsContainer } from './IconsContainer'
 import { HightlightButton } from './HightlightButton'
-import { PopUpContainer } from './popUpContainer'
+import { IconsContainer } from './IconsContainer'
+import { Item } from './item'
 import { Loader } from './loader'
 import { Overlay } from './overlay'
+import { PopUpContainer } from './popUpContainer'
 
-export { IconsContainer, HightlightButton, PopUpContainer, Loader, Overlay }
+export {
+	IconsContainer,
+	HightlightButton,
+	PopUpContainer,
+	Loader,
+	Overlay,
+	Item,
+}

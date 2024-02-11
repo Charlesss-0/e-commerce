@@ -1,7 +1,7 @@
 import { Footer, HeaderContent } from '../components'
 
 import { Outlet } from 'react-router-dom'
-import moonlight from '../assets/moonlight.svg'
+import about from '../assets/about.svg'
 import styled from 'styled-components'
 
 const AboutContainer = styled.div`
@@ -17,7 +17,7 @@ export default function AboutPage() {
 			<HeaderContent />
 			<AboutContainer>
 				<div className="bg-[#12372A] rounded-[1rem] text-white mt-[13rem] py-[2rem] px-[5rem] w-[90%]">
-					<div className="grid gap-[1rem] grid-cols-2 py-[2rem]">
+					<div className="grid gap-[10rem] grid-cols-2 py-[2rem]">
 						<div className="flex flex-col justify-between">
 							<h1 className="text-[2rem] font-bold">About GC</h1>
 							<p>
@@ -31,7 +31,7 @@ export default function AboutPage() {
 							</p>
 						</div>
 
-						<img src={moonlight} className="rounded-[1rem]" />
+						<img src={about} className="w-[500px]" />
 					</div>
 				</div>
 			</AboutContainer>
