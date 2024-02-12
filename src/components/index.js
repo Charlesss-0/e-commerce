@@ -1,9 +1,10 @@
-import HeaderContent from './header'
-import Footer from './footer'
-import EmptyMessage from './emptyMessage'
-import SubHeading from './subHeading'
-import CartItem from './cartItem'
-import FavoritesItem from './favoritesItem'
+import CartItem from './items/cartItem'
+import EmptyMessage from './messages/emptyMessage'
+import FavoritesItem from './items/favoritesItem'
+import Footer from './layout/footer'
+import HeaderContent from './layout/header'
+import ProductItem from './items/productItem'
+import SubHeading from './layout/subHeading'
 
 export {
 	HeaderContent,
@@ -12,4 +13,5 @@ export {
 	SubHeading,
 	CartItem,
 	FavoritesItem,
+	ProductItem,
 }

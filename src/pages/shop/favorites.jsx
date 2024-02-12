@@ -1,14 +1,14 @@
+import { EmptyMessage, FavoritesItem } from '../../components'
 import {
 	Loader,
 	Overlay,
 	PopUpContainer,
-} from '../components/styled-components'
+} from '../../components/styled_components'
 import { useEffect, useState } from 'react'
 
-import { EmptyMessage, FavoritesItem } from '../components'
-import FirebaseApp from '../firebase/firebase'
-import { fetchData } from '../utils'
-import { useAppContext } from '../context/context'
+import FirebaseApp from '../../firebase/firebase'
+import { fetchData } from '../../utils'
+import { useAppContext } from '../../context/context'
 
 export function Favorites() {
 	const firebaseApp = new FirebaseApp()

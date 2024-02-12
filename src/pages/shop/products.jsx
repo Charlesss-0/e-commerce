@@ -1,11 +1,8 @@
+import { Footer, HeaderContent, ProductItem } from '../../components'
 import styled, { keyframes } from 'styled-components'
 
 import FirebaseApp from '../../firebase/firebase'
-import Footer from '../../components/footer'
-import HeaderContent from '../../components/header'
-import { IconsContainer } from '../../components/styled-components'
 import { Outlet } from 'react-router-dom'
-import ProductItem from '../../components/productItem'
 import { products } from '../../data/data'
 import { useState } from 'react'
 
@@ -171,12 +168,12 @@ export default function Products() {
 
 				<ListContainer className={listGrid ? 'flex flex-col' : 'block'}>
 					{products.map(category =>
-						category.items.map((item, index) => (
+						category.items.map(item => (
 							<ProductItem
-								key={index}
+								key={item.id}
 								firebaseApp={firebaseApp}
 								item={item}
-								index={index}
+								id={item.id}
 								listGrid={listGrid}
 							/>
 						))

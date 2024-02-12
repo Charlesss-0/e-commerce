@@ -1,8 +1,9 @@
-import { useState, useEffect } from 'react'
-import styled from 'styled-components'
 import { Link, useLocation } from 'react-router-dom'
-import { useAppContext } from '../context/context'
-import FirebaseApp from '../firebase/firebase'
+import { useEffect, useState } from 'react'
+
+import FirebaseApp from '../../firebase/firebase'
+import styled from 'styled-components'
+import { useAppContext } from '../../context/context'
 
 const Header = styled.header`
 	background: none;

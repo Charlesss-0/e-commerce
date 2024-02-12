@@ -1,4 +1,4 @@
-import { IconsContainer } from './styled-components'
+import { IconsContainer } from '../styled_components'
 
 export default function FavoritesItem({ id, data, firebaseApp }) {
 	return (

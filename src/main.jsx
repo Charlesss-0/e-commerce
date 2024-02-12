@@ -1,9 +1,10 @@
-import React from 'react'
 import './styles/index.css'
-import ReactDOM from 'react-dom/client'
-import { BrowserRouter as Router } from 'react-router-dom'
+
 import AppRoutes from './routes/routes'
 import { CartProvider } from './context/context'
+import React from 'react'
+import ReactDOM from 'react-dom/client'
+import { BrowserRouter as Router } from 'react-router-dom'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
 	<React.StrictMode>

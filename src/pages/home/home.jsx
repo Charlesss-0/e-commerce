@@ -1,7 +1,7 @@
 import {
 	HightlightButton,
 	IconsContainer,
-} from '../../components/styled-components'
+} from '../../components/styled_components'
 
 import { Outlet } from 'react-router-dom'
 import { items } from '../../data/data'

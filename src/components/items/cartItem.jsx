@@ -1,5 +1,5 @@
-import { IconsContainer } from './styled-components'
-import { updateCount } from '../utils'
+import { IconsContainer } from '../styled_components'
+import { updateCount } from '../../utils'
 
 export default function CartItem({ id, data, firebaseApp }) {
 	return (
