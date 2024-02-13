@@ -1,10 +1,12 @@
 import { useEffect, useState } from 'react'
 import { useLocation, useNavigate, useParams } from 'react-router-dom'
 
+import FirebaseApp from '../../firebase/firebase'
 import { ProductDetailsContainer } from '../../components/styled_components'
 import { products } from '../../data/data'
 
 export default function ProductDetails() {
+	const firebaseApp = new FirebaseApp()
 	const { itemId } = useParams()
 	const [foundItem, setFoundItem] = useState()
 	const [category, setCategory] = useState([])
@@ -65,7 +67,10 @@ export default function ProductDetails() {
 
 							<p className="text-[1.3rem]">Price $ {foundItem.price}</p>
 
-							<button className="border-solid border border-[#2f2f2f] my-[2rem] py-[0.5rem] px-[1.5rem] transition-all duration-300 hover:bg-[#2f2f2f] hover:text-white hover:cursor-pointer active:scale-[0.95]">
+							<button
+								className="border-solid border border-[#2f2f2f] my-[2rem] py-[0.5rem] px-[1.5rem] transition-all duration-300 hover:bg-[#2f2f2f] hover:text-white hover:cursor-pointer active:scale-[0.95]"
+								onClick={() => firebaseApp.add(foundItem, 'cart')}
+							>
 								Add To Cart
 							</button>
 
