@@ -3,7 +3,7 @@ import styled from 'styled-components'
 export const Item = styled.li`
 	margin-top: 3rem;
 
-	& > div > img {
+	img {
 		width: 300px;
 		transition: all 400ms;
 
@@ -29,7 +29,7 @@ export const Item = styled.li`
 			padding: 1rem;
 		}
 
-		& > div > img {
+		img {
 			width: 200px;
 		}
 		`}

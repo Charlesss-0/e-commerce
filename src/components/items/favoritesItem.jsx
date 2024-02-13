@@ -4,12 +4,12 @@ export default function FavoritesItem({ id, data, firebaseApp }) {
 	return (
 		<li
 			key={id}
-			className="flex flex-col gap-[1rem] h-[max-content] mb-[2rem] rounded-[0.5rem] p-[0.8rem] bg-[#efefefaa] box-shadow [&>img]:w-[250px]  [&>img]:rounded-[0.5rem] [&>img]:shadow-md"
+			className="flex flex-col gap-[1rem] h-[max-content] mb-[2rem] rounded-[0.5rem] p-[0.8rem] bg-[#efefefaa] box-shadow [&>img]:w-full  [&>img]:rounded-[0.5rem] [&>img]:shadow-md"
 		>
-			<img src={data.img} alt={data.details} />
+			<img src={data.img} alt={data.name} />
 			<div className="flex justify-between">
 				<div>
-					<p>{data.details}</p>
+					<p>{data.name}</p>
 					<p>$ {data.price}</p>
 				</div>
 				<IconsContainer>

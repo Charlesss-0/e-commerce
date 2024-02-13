@@ -1,7 +1,7 @@
 import {
+	GoogleAuthProvider,
 	browserLocalPersistence,
 	getAuth,
-	GoogleAuthProvider,
 	setPersistence,
 	signInWithPopup,
 	signOut,
@@ -18,6 +18,7 @@ import {
 	remove,
 	update,
 } from 'firebase/database'
+
 import { initializeApp } from 'firebase/app'
 
 class FirebaseApp {
@@ -81,11 +82,11 @@ class FirebaseApp {
 		try {
 			value.uid = this.auth.currentUser.uid
 
-			const nodeQuery = query(dbRef, orderByChild('img'))
+			const nodeQuery = query(dbRef, orderByChild('id'))
 			const snapshot = await get(nodeQuery)
 
 			const data = snapshot.val() || {}
-			const idExists = Object.values(data).some(item => item.img === value.img)
+			const idExists = Object.values(data).some(item => item.id === value.id)
 
 			if (!idExists) {
 				push(dbRef, value)

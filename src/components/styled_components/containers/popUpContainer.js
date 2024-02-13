@@ -17,5 +17,17 @@ export const PopUpContainer = styled.div`
 		props.$activeClass &&
 		`
         padding: 2rem;
+
+		& > ul {
+			display: grid;
+			grid-template-columns: repeat(auto-fit, minmax(250px, 300px));
+			gap: 2.5rem;
+			justify-content: center;
+	
+			height: 100%;
+			width: 100%;
+			padding-bottom: 3rem;
+			overflow: auto;
+		}
     `}
 `

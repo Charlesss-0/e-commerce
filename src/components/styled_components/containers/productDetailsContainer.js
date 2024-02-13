@@ -18,24 +18,29 @@ export const ProductDetailsContainer = styled.div`
 	& > div > .img-container {
 		height: 100vh;
 		width: 50%;
-		overflow: hidden;
+		padding: 5rem;
+		display: grid;
+		place-content: center;
 
-		& > img {
+		& > div {
+			box-shadow: 3px 3px 6px #0005;
+		}
+
+		& > div > img {
 			height: 100%;
 			object-fit: cover;
+			transition: all 500ms;
+
+			&:hover {
+				transform: scale(1.3);
+			}
 		}
 	}
 
 	& > div > .details-container {
-		padding: 1rem;
-		flex-grow: 1;
-
-		& > h1 {
-			font-size: 2rem;
-		}
-
-		& > h2 {
-			font-size: 1.5rem;
-		}
+		padding: 5rem 3rem;
+		width: 50%;
+		display: flex;
+		align-items: center;
 	}
 `

@@ -8,10 +8,10 @@ export default function CartItem({ id, data, firebaseApp }) {
 			className="flex justify-between items-center p-[0.8rem] rounded-[0.5rem] bg-[#efefef] box-shadow"
 		>
 			<div className="flex gap-[1rem] text-[0.8rem] [&>img]:w-[100px] [&>img]:rounded-[0.3rem] [&>img]:border-solid [&>img]:border-2 [&>img]:border-[#aaa]">
-				<img src={data.img} />
+				<img src={data.img} alt={data.name} />
 				<div className="flex flex-col justify-between">
 					<div>
-						<p>{data.details}</p>
+						<p>{data.name}</p>
 						<p>$ {data.price}</p>
 					</div>
 					<IconsContainer>

@@ -58,7 +58,7 @@ export function Favorites() {
 					{isLoading ? (
 						<Loader />
 					) : (
-						<ul className="flex flex-wrap justify-around gap-[2rem] h-full pb-[3rem] overflow-auto">
+						<ul>
 							{isEmpty ? (
 								<>
 									{data.map(({ key, value }) => (
