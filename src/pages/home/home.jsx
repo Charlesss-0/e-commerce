@@ -3,6 +3,7 @@ import {
 	IconsContainer,
 } from '../../components/styled_components'
 
+import { Link } from 'react-router-dom'
 import { Outlet } from 'react-router-dom'
 import { items } from '../../data/data'
 import styled from 'styled-components'
@@ -131,9 +132,11 @@ export default function Home() {
 					<p className="text-shadow-sm">
 						Discover furniture that brings comfort to your home
 					</p>
-					<PrimaryButton>
-						<span>Shop Now</span>
-					</PrimaryButton>
+					<Link to="products">
+						<PrimaryButton>
+							<span>Shop Now</span>
+						</PrimaryButton>
+					</Link>
 				</div>
 			</Hero>
 
@@ -179,7 +182,9 @@ export default function Home() {
 					<p className="text-[1.3rem] mb-[2rem]">
 						Long lasting and comfortable to use. This is for you.
 					</p>
-					<HightlightButton>Shop Now</HightlightButton>
+					<Link to="products">
+						<HightlightButton>Shop Now</HightlightButton>
+					</Link>
 				</div>
 			</HighlightContainer>
 
@@ -221,7 +226,9 @@ export default function Home() {
 						Up to <span className="text-[#B80000]">50%</span> discount this
 						season
 					</h1>
-					<HightlightButton>Shop Now</HightlightButton>
+					<Link to="products">
+						<HightlightButton>Shop Now</HightlightButton>
+					</Link>
 				</div>
 			</HighlightContainer>
 

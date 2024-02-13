@@ -5,6 +5,7 @@ import {
 	PopUpContainer,
 } from '../../components/styled_components'
 import { useEffect, useState } from 'react'
+import { useLocation, useNavigate } from 'react-router-dom'
 
 import FirebaseApp from '../../firebase/firebase'
 import { fetchData } from '../../utils'
@@ -13,10 +14,12 @@ import { useAppContext } from '../../context/context'
 export function Cart() {
 	const firebaseApp = new FirebaseApp()
 	const [data, setData] = useState([])
-	const { hideCart, setHideCart, setCartCount, isSignedIn, setIsSignedIn } =
-		useAppContext()
+	const { setCartCount, isSignedIn, setIsSignedIn } = useAppContext()
 	const [isEmpty, setIsEmpty] = useState(false)
 	const [isLoading, setIsLoading] = useState(false)
+	const location = useLocation()
+	const currentPath = location.pathname.includes('cart')
+	const navigate = useNavigate()
 
 	useEffect(() => {
 		fetchData(setIsLoading, setData, 'cart')
@@ -33,26 +36,24 @@ export function Cart() {
 	}, [data])
 
 	useEffect(() => {
-		document.body.style.overflow = hideCart ? 'hidden' : 'auto'
+		document.body.style.overflow = currentPath ? 'hidden' : 'auto'
 
 		return () => {
 			document.body.style.overflow = 'auto'
 		}
-	}, [hideCart])
+	}, [currentPath])
 
 	useEffect(() => {
 		setIsSignedIn(!!firebaseApp.auth.currentUser)
 	}, [firebaseApp.auth.currentUser])
 
+	const goBack = () => {
+		navigate(-1)
+	}
+
 	return (
-		<Overlay className={hideCart ? 'block' : 'hidden'}>
-			<div
-				className={
-					hideCart
-						? 'absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] flex items-start gap-[1rem]'
-						: 'hidden'
-				}
-			>
+		<Overlay>
+			<div className="absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] flex items-start gap-[1rem]">
 				<PopUpContainer>
 					<SubHeading>Cart</SubHeading>
 					{isLoading ? (
@@ -83,7 +84,7 @@ export function Cart() {
 					)}
 				</PopUpContainer>
 				<i
-					onClick={() => setHideCart(!hideCart)}
+					onClick={goBack}
 					className="fi fi-rr-cross-circle text-[1.5rem] rounded-full p-[0.5rem] bg-[#efefefaa] box-shadow hover:bg-[#2f2f2faa] hover:text-white hover:cursor-pointer transition-all duration-400"
 				></i>
 			</div>

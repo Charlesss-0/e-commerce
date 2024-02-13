@@ -5,6 +5,7 @@ import {
 	PopUpContainer,
 } from '../../components/styled_components'
 import { useEffect, useState } from 'react'
+import { useLocation, useNavigate } from 'react-router-dom'
 
 import FirebaseApp from '../../firebase/firebase'
 import { fetchData } from '../../utils'
@@ -17,6 +18,9 @@ export function Favorites() {
 		useAppContext()
 	const [isEmpty, setIsEmpty] = useState(false)
 	const [isLoading, setIsLoading] = useState(false)
+	const location = useLocation()
+	const currentPath = location.pathname.includes('favorites')
+	const navigate = useNavigate()
 
 	useEffect(() => {
 		fetchData(setIsLoading, setData, 'favorites')
@@ -33,26 +37,24 @@ export function Favorites() {
 	}, [data])
 
 	useEffect(() => {
-		document.body.style.overflow = hideFav ? 'hidden' : 'auto'
+		document.body.style.overflow = currentPath ? 'hidden' : 'auto'
 
 		return () => {
 			document.body.style.overflow = 'auto'
 		}
-	}, [hideFav])
+	}, [currentPath])
 
 	useEffect(() => {
 		setIsSignedIn(!!firebaseApp.auth.currentUser)
 	}, [firebaseApp.auth.currentUser])
 
+	const goBack = () => {
+		navigate(-1)
+	}
+
 	return (
-		<Overlay className={hideFav ? 'block' : 'hidden'}>
-			<div
-				className={
-					hideFav
-						? 'absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] flex gap-[1rem] items-start'
-						: 'hidden'
-				}
-			>
+		<Overlay>
+			<div className="absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] flex gap-[1rem] items-start">
 				<PopUpContainer $activeClass>
 					<h1 className="text-center text-[1.3rem] mb-[2rem]">Favorites</h1>
 					{isLoading ? (
@@ -85,7 +87,7 @@ export function Favorites() {
 					)}
 				</PopUpContainer>
 				<i
-					onClick={() => setHideFav(!hideFav)}
+					onClick={goBack}
 					className="fi fi-rr-cross-circle text-[1.5rem] rounded-full p-[0.5rem] bg-[#efefefaa] box-shadow hover:bg-[#2f2f2faa] hover:text-white hover:cursor-pointer transition-all duration-400"
 				></i>
 			</div>
