@@ -14,8 +14,7 @@ import { useAppContext } from '../../context/context'
 export function Favorites() {
 	const firebaseApp = new FirebaseApp()
 	const [data, setData] = useState([])
-	const { hideFav, setHideFav, setFavCount, isSignedIn, setIsSignedIn } =
-		useAppContext()
+	const { setFavCount, isSignedIn, setIsSignedIn } = useAppContext()
 	const [isEmpty, setIsEmpty] = useState(false)
 	const [isLoading, setIsLoading] = useState(false)
 	const location = useLocation()

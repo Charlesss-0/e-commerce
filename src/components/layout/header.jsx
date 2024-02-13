@@ -143,16 +143,7 @@ const SignContainer = styled.div`
 export default function HeaderContent() {
 	const firebaseApp = new FirebaseApp()
 	const menuItems = ['Home', 'Products', 'About']
-	const {
-		isScrolled,
-		setIsScrolled,
-		hideCart,
-		setHideCart,
-		hideFav,
-		setHideFav,
-		cartCount,
-		favCount,
-	} = useAppContext()
+	const { isScrolled, setIsScrolled, cartCount, favCount } = useAppContext()
 
 	const location = useLocation()
 	const [focus, setFocus] = useState(false)
@@ -224,18 +215,12 @@ export default function HeaderContent() {
 
 				<div className="flex items-center gap-[2.5rem] ml-[3rem] p-[0.5rem] text-[1.3rem] [&>i]:text-[1.3rem] [&>i]:hover:cursor-pointer">
 					<Link to="cart">
-						<i
-							className="fi fi-rr-briefcase-blank relative"
-							onClick={() => setHideCart(!hideCart)}
-						>
+						<i className="fi fi-rr-briefcase-blank relative">
 							{cartCount && firebaseApp.auth.currentUser ? <Indicator /> : ''}
 						</i>
 					</Link>
 					<Link to="favorites">
-						<i
-							className="fi fi-rr-heart relative"
-							onClick={() => setHideFav(!hideFav)}
-						>
+						<i className="fi fi-rr-heart relative">
 							{favCount && firebaseApp.auth.currentUser ? <Indicator /> : ''}
 						</i>
 					</Link>
