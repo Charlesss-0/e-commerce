@@ -3,21 +3,27 @@ import styled from 'styled-components'
 export const ProductDetailsContainer = styled.div`
 	position: fixed;
 	left: 0;
+	right: 0;
 	bottom: 0;
 	z-index: 20;
-	overflow: hidden;
+	overflow: auto;
 
 	width: 100%;
-	height: 100%;
+	height: 100vh;
 	background: #efefef;
+	display: grid;
+	justify-content: center;
 
-	& > div {
+	& > .container {
 		display: flex;
+
+		& > div {
+			width: 50%;
+		}
 	}
 
-	& > div > .img-container {
-		height: 100vh;
-		width: 50%;
+	& > .container > .img-container {
+		height: 100%;
 		padding: 5rem;
 		display: grid;
 		place-content: center;
@@ -37,9 +43,8 @@ export const ProductDetailsContainer = styled.div`
 		}
 	}
 
-	& > div > .details-container {
+	& > .container > .details-container {
 		padding: 5rem 3rem;
-		width: 50%;
 		display: flex;
 		align-items: center;
 	}

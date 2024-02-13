@@ -1,13 +1,16 @@
 import { useEffect, useState } from 'react'
+import { useLocation, useNavigate, useParams } from 'react-router-dom'
 
 import { ProductDetailsContainer } from '../../components/styled_components'
 import { products } from '../../data/data'
-import { useParams } from 'react-router-dom'
 
 export default function ProductDetails() {
 	const { itemId } = useParams()
 	const [foundItem, setFoundItem] = useState()
 	const [category, setCategory] = useState([])
+	const location = useLocation()
+	const currentPath = location.pathname.includes('details')
+	const navigate = useNavigate()
 
 	useEffect(() => {
 		products.forEach(category => {
@@ -19,10 +22,26 @@ export default function ProductDetails() {
 		})
 	}, [itemId])
 
+	useEffect(() => {
+		document.body.style.overflow = currentPath ? 'hidden' : 'auto'
+
+		return () => {
+			document.body.style.overflow = 'auto'
+		}
+	}, [currentPath])
+
+	const goBack = () => {
+		navigate(-1)
+	}
+
 	return (
 		<ProductDetailsContainer>
+			<div className="p-[2rem] flex justify-end">
+				<i className="fi fi-rr-cross cursor-pointer" onClick={goBack}></i>
+			</div>
+
 			{foundItem ? (
-				<div>
+				<div className="container">
 					<div className="img-container">
 						<div className="overflow-hidden rounded-[1rem]">
 							<img src={foundItem.img} alt={foundItem.details} />
